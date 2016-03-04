@@ -31,6 +31,8 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
     
     var basicEnemyArray = [BasicEnemy]()
     var midEnemyArray = [MidEnemy]()
+    var bodiesToRemove = [SKSpriteNode]()
+    var shouldRemoveBodies = false
     
     
     func addPlayer() {
@@ -84,8 +86,8 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
     
     func enemyFire() {
         
-//        basicEnemy.fireBullet(self)
-//        midEnemy.fireBullet(self)
+        basicEnemy.fireBullet(self)
+        midEnemy.fireBullet(self)
     }
     
     
@@ -106,22 +108,17 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    func addBasicEnemy() {
-        for i in 0...5 {
-            let i = BasicEnemy(imageName: "basicEnemy")
-            basicEnemyArray.append(i)
-            SKAction.waitForDuration(5.0)
-            i.addEnemy(self)
-        }
+    func addBasicEnemy(enemy: BasicEnemy) {
+        let enemy = BasicEnemy(imageName: "basicEnemy")
+        basicEnemyArray.append(enemy)
+        enemy.addEnemy(self)
     }
 
     
-    func addMidEnemy() {
-        for i in 0...2 {
-            let i = MidEnemy(imageName: "midEnemy")
-            midEnemyArray.append(i)
-            i.addEnemy(self)
-        }
+    func addMidEnemy(enemy: MidEnemy) {
+        let enemy = MidEnemy(imageName: "midEnemy")
+        midEnemyArray.append(enemy)
+        enemy.addEnemy(self)
     }
     
     
@@ -150,31 +147,32 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
         // Add Player
         runAction(SKAction.runBlock(addPlayer))
         
-//        SKAction.waitForDuration(10.0)
-        
-        // Repeatedly add basic enemy until it dies
-        runAction(SKAction.repeatActionForever(
-            SKAction.sequence([
-                SKAction.runBlock(addBasicEnemy),
-                SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 7.0)))
+        // Repeatedly add 6 basic enemies at random intervals
+        for i in 0...5 {
+            let i = BasicEnemy(imageName: "basicEnemy")
+            runAction(SKAction.repeatActionForever(
+                SKAction.sequence([
+                    SKAction.runBlock({
+                        self.addBasicEnemy(i)
+                    }),
+                    SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 10.0)))
                 ])
             ))
+        }
         
-        // Repeatedly add mid enemy until it dies
-//        runAction(SKAction.repeatActionForever(
-//            SKAction.sequence([
-//                SKAction.runBlock(addMidEnemy),
-//                SKAction.waitForDuration(NSTimeInterval (random(min: 8.5, max: 10.0)))
-//                ])
-//            ))
-        
-        addMidEnemy()
-        
-        while midEnemyArray.count > 0 {
-            runAction(SKAction.sequence([
-                SKAction.runBlock(addMidEnemy),
-                SKAction.waitForDuration(NSTimeInterval (random(min: 8.5, max: 10.0)))
-                ]))
+//        runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 9.0))))
+        // Repeatedly add 3 basic enemies at random intervals
+        for i in 0...2 {
+            let i = MidEnemy(imageName: "midEnemy")
+            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 9.0))))
+            runAction(SKAction.repeatActionForever(
+                SKAction.sequence([
+                    SKAction.runBlock({
+                        self.addMidEnemy(i)
+                    }),
+                    SKAction.waitForDuration(NSTimeInterval (random(min: 15.0, max: 25.0)))
+                ])
+            ))
         }
         
         
@@ -340,6 +338,17 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
         if hud.pressedButtons.indexOf(hud.buttonShoot) != nil {
             player.fireBullet(self)
         }
+        
+        if shouldRemoveBodies == true {
+            for i in 0...bodiesToRemove.count-1 {
+                bodiesToRemove[i].removeFromParent()
+            }
+            
+            bodiesToRemove.removeAll(keepCapacity: false)
+            
+            shouldRemoveBodies = false
+        }
+        
     }
     ///////////////////////////// END DPAD STUFF //////////////////////////////////
     
@@ -355,44 +364,43 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
                 enemyHit(secondBody as! MidEnemy)
                 
                 if midEnemyDead(secondBody as! MidEnemy) {
-                    firstBody.removeFromParent()
-                    secondBody.removeFromParent()
+                    bodiesToRemove.append(firstBody)
+                    bodiesToRemove.append(secondBody)
+                    shouldRemoveBodies = true
+                    
                     midEnemyArray.removeAtIndex(midEnemyArray.indexOf(index)!)
                     score += 250
                     updateScore()
                     
                 } else {
-                    firstBody.removeFromParent()
+                    bodiesToRemove.append(firstBody)
+                    shouldRemoveBodies = true
                 }
 
             }
             i++
         }
-//        
-//        // If collision is with midEnemy, else if player
-//        if midEnemyArray.contains(secondBody as! MidEnemy) {
-//            enemyHit(secondBody as! MidEnemy)
-//            
-//            // If enemy is out of health, remove it. Else remove just the projectile
-//            if midEnemyDead(secondBody as! MidEnemy) {
-//                firstBody.removeFromParent()
-//                secondBody.removeFromParent()
-//                score += 250
-//                updateScore()
-//            } else {
-//                firstBody.removeFromParent()
-//            }
-//            
-//        } else if firstBody == player {
-//            firstBody.removeFromParent()
-//            secondBody.removeFromParent()
-//            
-//        } else if secondBody == basicEnemy {
-//            firstBody.removeFromParent()
-//            secondBody.removeFromParent()
-//            score += 100
-//            updateScore()
-//        }
+        
+        i = 0
+        
+        for index in basicEnemyArray {
+            if index == secondBody {
+                bodiesToRemove.append(firstBody)
+                bodiesToRemove.append(secondBody)
+                shouldRemoveBodies = true
+                basicEnemyArray.removeAtIndex(basicEnemyArray.indexOf(index)!)
+                score += 100
+                updateScore()
+            }
+            i++
+        }
+
+    
+        if firstBody == player {
+            bodiesToRemove.append(firstBody)
+            bodiesToRemove.append(secondBody)
+            shouldRemoveBodies = true
+        }
     }
     
     
@@ -415,8 +423,8 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
             print("player hit")
             projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode,
                 secondBody: secondBody.node as! SKSpriteNode)
-            lives--
-//            runAction(SKAction.runBlock(addPlayer))
+//            lives--
+            runAction(SKAction.runBlock(addPlayer))
 
             if score >= 30 {
                 score -= 30

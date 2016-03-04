@@ -74,7 +74,7 @@ class BasicEnemy: Enemy {
         scene.addChild(self)
         
         // Determine speed of the enemy
-        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
+        let actualDuration = random(min: CGFloat(1.5), max: CGFloat(4.0))
         
         // Create the actions
         let actionMove = SKAction.moveTo(CGPoint(x: -self.size.width/2, y: actualY), duration: NSTimeInterval(actualDuration))
