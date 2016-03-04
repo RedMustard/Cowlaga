@@ -29,26 +29,20 @@ func createUserScores() {
 }
 
 func addScore(inScore: IntegerLiteralType) {
-//    userScores.setInteger(score, forKey: "score")
     print("Score added")
     
     for i in 1...10 {
         if inScore > userScores.integerForKey("\(i)") {
-            print("true")
+//            print("true \(i)")
+            let oldScore = userScores.integerForKey("\(i)")
+//            print(oldScore)
+            userScores.setInteger(inScore, forKey: "\(i)")
+            addScore(oldScore)
+            break
         }
     }
-    
-    
-//    if userScores.integerForKey(i) < inScore {
-////        if userScores.integerForKey("1") < inScore
-//        userScores.setInteger(score, forKey: "1")
-//    } else if userScores.integerForKey("2") == 0 {
-//    
-//    }
-//    
 }
 
-//var scoreArray = NSMutableArray(capacity: 10)
 
 var score = IntegerLiteralType()
 
