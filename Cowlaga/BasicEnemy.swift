@@ -35,16 +35,16 @@ class BasicEnemy: Enemy {
         } else {
             canFire = false
             let projectile = EnemyBullet(imageName: "basicEnemyProjectile")
-            projectile.position.x = self.position.x - 50
+            projectile.position.x = self.position.x
             projectile.position.y = self.position.y
             scene.addChild(projectile)
         
-            let moveBulletAction = SKAction.moveTo(CGPoint(x: -scene.size.width + projectile.size.width, y: self.position.y), duration: 0.7)
+            let moveBulletAction = SKAction.moveTo(CGPoint(x: -scene.size.width + projectile.size.width, y: self.position.y), duration: 2.0)
             let removeBulletAction = SKAction.removeFromParent()
         
             projectile.runAction(SKAction.sequence([moveBulletAction, removeBulletAction]))
         
-            let waitToEnableFire = SKAction.waitForDuration(0.7)
+            let waitToEnableFire = SKAction.waitForDuration(NSTimeInterval (random(min: 0.7, max: 2.0)))
             runAction(waitToEnableFire, completion: {
                 self.canFire = true
             })

@@ -37,16 +37,23 @@ class MidEnemy: Enemy {
         } else {
             canFire = false
             let projectile = EnemyBullet(imageName: "midEnemyProjectile")
-            projectile.position.x = self.position.x - 50
-            projectile.position.y = self.position.y
-            scene.addChild(projectile)
+            let projectile2 = EnemyBullet(imageName: "midEnemyProjectile")
+            projectile.position.x = self.position.x
+            projectile.position.y = self.position.y + 25
             
-            let moveBulletAction = SKAction.moveTo(CGPoint(x: -scene.size.width + projectile.size.width, y: self.position.y), duration: 0.7)
+            projectile2.position.x = self.position.x
+            projectile2.position.y = self.position.y - 25
+            scene.addChild(projectile)
+            scene.addChild(projectile2)
+            
+            let moveBulletAction1 = SKAction.moveTo(CGPoint(x: -scene.size.width + projectile.size.width, y: self.position.y+25), duration: 2.5)
+            let moveBulletAction2 = SKAction.moveTo(CGPoint(x: -scene.size.width + projectile.size.width, y: self.position.y-25), duration: 2.5)
             let removeBulletAction = SKAction.removeFromParent()
             
-            projectile.runAction(SKAction.sequence([moveBulletAction, removeBulletAction]))
+            projectile.runAction(SKAction.sequence([moveBulletAction1, removeBulletAction]))
+            projectile2.runAction(SKAction.sequence([moveBulletAction2, removeBulletAction]))
             
-            let waitToEnableFire = SKAction.waitForDuration(1.0)
+            let waitToEnableFire = SKAction.waitForDuration(NSTimeInterval (random(min: CGFloat(1.0), max: CGFloat(3.0))))
             runAction(waitToEnableFire, completion: {
                 self.canFire = true
             })

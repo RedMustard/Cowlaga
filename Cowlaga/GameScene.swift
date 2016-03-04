@@ -20,7 +20,7 @@ struct PhysicsCategory {
 }
 
 
-class LevelOne: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     let hud = HUD()
     let player = Player()
     let basicEnemy = BasicEnemy(imageName: "basicEnemy")
@@ -86,8 +86,15 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
     
     func enemyFire() {
         
-        basicEnemy.fireBullet(self)
-        midEnemy.fireBullet(self)
+        for enemy in basicEnemyArray {
+            enemy.fireBullet(self)
+        }
+        for enemy in midEnemyArray {
+            enemy.fireBullet(self)
+        }
+        
+//        basicEnemy.fireBullet(self)
+//        midEnemy.fireBullet(self)
     }
     
     
@@ -121,6 +128,40 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
         enemy.addEnemy(self)
     }
     
+    func midFire(enemy: MidEnemy) {
+        enemy.fireBullet(self)
+    }
+    
+    func addEnemyActions() {
+        for i in 0...4 {
+            let i = BasicEnemy(imageName: "basicEnemy")
+            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 2.0, max: 10.0))))
+            runAction(SKAction.repeatActionForever(
+                SKAction.sequence([
+                    SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 10.0))),
+                    SKAction.runBlock({
+                        self.addBasicEnemy(i)
+                    })
+                    ])
+                ))
+        }
+        
+        // Repeatedly add increasing amount of mid enemies at random intervals over time
+        for i in 0...2 {
+            let i = MidEnemy(imageName: "midEnemy")
+            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 60.0, max: 90.0))))
+            runAction(SKAction.repeatActionForever(
+                SKAction.sequence([
+                    SKAction.waitForDuration(NSTimeInterval (random(min: 10.0, max: 15.0))),
+                    SKAction.runBlock({
+                        self.addMidEnemy(i)
+                    })
+//                    SKAction.waitForDuration(NSTimeInterval (random(min: 15.0, max: 25.0)))
+                    ])
+                ))
+        }
+
+    }
     
     func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
@@ -147,35 +188,36 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
         // Add Player
         runAction(SKAction.runBlock(addPlayer))
         
+        
+        runAction(SKAction.sequence([SKAction.waitForDuration(1.0), SKAction.runBlock(addEnemyActions)
         // Repeatedly add 6 basic enemies at random intervals
-        for i in 0...5 {
-            let i = BasicEnemy(imageName: "basicEnemy")
-            runAction(SKAction.repeatActionForever(
-                SKAction.sequence([
-                    SKAction.runBlock({
-                        self.addBasicEnemy(i)
-                    }),
-                    SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 10.0)))
-                ])
-            ))
-        }
-        
-//        runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 9.0))))
-        // Repeatedly add 3 basic enemies at random intervals
-        for i in 0...2 {
-            let i = MidEnemy(imageName: "midEnemy")
-            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 9.0))))
-            runAction(SKAction.repeatActionForever(
-                SKAction.sequence([
-                    SKAction.runBlock({
-                        self.addMidEnemy(i)
-                    }),
-                    SKAction.waitForDuration(NSTimeInterval (random(min: 15.0, max: 25.0)))
-                ])
-            ))
-        }
-        
-        
+//        for i in 0...8 {
+//            let i = BasicEnemy(imageName: "basicEnemy")
+//            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 2.0, max: 10.0))))
+//            runAction(SKAction.repeatActionForever(
+//                SKAction.sequence([
+//                    SKAction.runBlock({
+//                        self.addBasicEnemy(i)
+//                    }),
+//                    SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 10.0)))
+//                ])
+//            ))
+//        }
+//        
+//        // Repeatedly add 2 basic enemies at random intervals
+//        for i in 0...1 {
+//            let i = MidEnemy(imageName: "midEnemy")
+//            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 9.0))))
+//            runAction(SKAction.repeatActionForever(
+//                SKAction.sequence([
+//                    SKAction.runBlock({
+//                        self.addMidEnemy(i)
+//                    }),
+//                    SKAction.waitForDuration(NSTimeInterval (random(min: 15.0, max: 25.0)))
+//                ])
+//            ))
+//        }
+        ]))
         // Make enemies shoot
         runAction(SKAction.repeatActionForever(
             SKAction.sequence([
@@ -183,7 +225,7 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
                 SKAction.waitForDuration(0.5)
                 ])
             ))
-    }
+    } // End didMoveToView
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -339,9 +381,16 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
             player.fireBullet(self)
         }
         
+        // If collision flag raised, remove flagged bodies
         if shouldRemoveBodies == true {
             for i in 0...bodiesToRemove.count-1 {
                 bodiesToRemove[i].removeFromParent()
+                
+                if bodiesToRemove[i] == player {
+                    print("body is player")
+                    addPlayer()
+                }
+
             }
             
             bodiesToRemove.removeAll(keepCapacity: false)
@@ -356,8 +405,8 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
     func projectileDidCollideWithMonster(firstBody:SKSpriteNode, secondBody:SKSpriteNode) {
         print("Removed")
         
+        // If midEnemy is hit
         var i = 0
-        
         for index in midEnemyArray {
             if index == secondBody {
                 print("index = second")
@@ -381,8 +430,8 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
             i++
         }
         
+        // If basicEnemy is hit
         i = 0
-        
         for index in basicEnemyArray {
             if index == secondBody {
                 bodiesToRemove.append(firstBody)
@@ -394,8 +443,8 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
             }
             i++
         }
-
-    
+        
+        // If player is hit
         if firstBody == player {
             bodiesToRemove.append(firstBody)
             bodiesToRemove.append(secondBody)
@@ -423,8 +472,8 @@ class LevelOne: SKScene, SKPhysicsContactDelegate {
             print("player hit")
             projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode,
                 secondBody: secondBody.node as! SKSpriteNode)
-//            lives--
-            runAction(SKAction.runBlock(addPlayer))
+            lives--
+//            runAction(SKAction.runBlock(addPlayer))
 
             if score >= 30 {
                 score -= 30
