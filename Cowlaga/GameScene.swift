@@ -12,15 +12,10 @@ import UIKit
 struct PhysicsCategory {
     static let None       : UInt32 = 0
     static let All        : UInt32 = UInt32.max
-//    static let Player     : UInt32 = 0b111       // 1
-//    static let Enemy      : UInt32 = 0b1
-//    static let Projectile : UInt32 = 0b10      // 2
-//    static let Border     : UInt32 = 0b11
     static let Player     : UInt32 = 1 << 0
     static let PlayProj   : UInt32 = 1 << 1
     static let Enemy      : UInt32 = 1 << 2
     static let EnemyProj  : UInt32 = 1 << 3
-//    static let Projectile : UInt32 = 1 << 4      // 2
     static let Border     : UInt32 = 1 << 4
 }
 
@@ -31,10 +26,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let midEnemy = MidEnemy(imageName: "midEnemy")
     let menu = InGameMenu()
     var lives = 3
-//    var score = 0
     
     func addPlayer() {
-//        lives--
         print("Lives\(lives)")
         
         // Call Game Over

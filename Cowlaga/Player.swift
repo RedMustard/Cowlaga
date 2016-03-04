@@ -9,8 +9,6 @@
 import SpriteKit
 
 
-
-
 class Player: SKSpriteNode {
     private var canFire = true
     
@@ -18,12 +16,10 @@ class Player: SKSpriteNode {
         let texture = SKTexture(imageNamed: "Spaceship")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         
-//        self.position = CGPoint(x: 40 + self.size.width, y: self.frame.height/2)
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.Player
         self.physicsBody?.contactTestBitMask = PhysicsCategory.EnemyProj
         self.physicsBody?.collisionBitMask = PhysicsCategory.Border
-
         self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false
 
@@ -56,7 +52,4 @@ class Player: SKSpriteNode {
             
         }
     }
-    
-    
-    
 }

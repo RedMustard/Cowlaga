@@ -18,7 +18,6 @@ class EnemyBullet: Bullet {
         self.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         self.physicsBody?.collisionBitMask = PhysicsCategory.None
         self.physicsBody?.usesPreciseCollisionDetection = true
-
     }
 
     required init?(coder aDecoder: NSCoder) {

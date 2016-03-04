@@ -12,8 +12,6 @@ class InGameMenu: SKSpriteNode {
     let buttonBack = SKSpriteNode(imageNamed: "play")
     let buttonMenu = SKSpriteNode(imageNamed: "play")
     let buttonScores = SKSpriteNode(imageNamed: "play")
-//    let menu = SKSpriteNode(imageNamed: "menubox")
-//    let menu = SKShapeNode(size: CGSize())
     
     init() {
         let texture = SKTexture(imageNamed: "menubox")
@@ -31,13 +29,6 @@ class InGameMenu: SKSpriteNode {
     }
     
     func addMenu(scene: SKScene) {
-//        menu.size = CGSize(width: 1350, height: 700)
-//        menu.position = CGPoint(x: 0, y: 0)
-//        menu.zPosition = 1
-//        menu.alpha = 0.7
-//        menu.setScale(0.5)
-//        scene.addChild(menu)
-        
         let pauseLabel = SKLabelNode(text: "Game Paused")
         pauseLabel.position = CGPoint(x: self.size.width/4 - 8, y: self.size.height/2 - 60)
         pauseLabel.alpha = 2

@@ -12,7 +12,6 @@ class ScoreScene: SKScene {
     
     let backButton = SKSpriteNode(imageNamed: "play")
     let scoreTitle = SKLabelNode()
-//    let scoreList = SKLabelNode()
     
     func scoreList() {
         let oneScore = SKLabelNode(text: "1. \(userScores.stringForKey("1")!)")
@@ -90,10 +89,6 @@ class ScoreScene: SKScene {
         scoreTitle.zPosition = 1
         
         scoreList()
-//        scoreList.position = CGPointMake(frame.width/2, frame.height-125)
-//        scoreList.fontSize = 18
-//        self.addChild(scoreList)
-//        scoreList.zPosition = 1
         
         backButton.position = CGPointMake(frame.width/2, frame.height/8)
         self.addChild(backButton)
@@ -115,8 +110,6 @@ class ScoreScene: SKScene {
                     view.presentScene(scene)
                 }
             }
-            
-            
         }
     } // End touchesBegan
 } // End class

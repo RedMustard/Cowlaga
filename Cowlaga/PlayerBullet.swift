@@ -11,6 +11,7 @@ import SpriteKit
 class PlayerBullet: Bullet {
     override init(imageName: String) {
         super.init(imageName: imageName)
+        
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         self.physicsBody?.dynamic = true
         self.physicsBody?.categoryBitMask = PhysicsCategory.PlayProj

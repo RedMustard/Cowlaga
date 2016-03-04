@@ -28,7 +28,6 @@ class MenuScene: SKScene {
         self.addChild(gameTitle)
         gameTitle.zPosition = 1
         
-//        playButton = SKSpriteNode(texture: playButtonTex)
         playButton.position = CGPointMake(frame.width/2, frame.height/2)
         self.addChild(playButton)
         playButton.zPosition = 1
@@ -60,8 +59,6 @@ class MenuScene: SKScene {
                 }
 
             } 
-            
-            
         }
     } // End touchesBegan
 } // End class

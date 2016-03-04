@@ -17,8 +17,6 @@ class HUD: SKSpriteNode {
     let menuLabel = SKLabelNode(text: "Menu")
     var lifeLabel = SKLabelNode()
     var scoreLabel = SKLabelNode()
-//    var score = IntegerLiteralType()
-
 
     init() {
         let texture = SKTexture(imageNamed: "menubar")
@@ -52,24 +50,6 @@ class HUD: SKSpriteNode {
     
     
     func addInfo(scene: SKScene) {
-//        let headerBar = SKSpriteNode(imageNamed: "menubar")
-//        headerBar.position = CGPoint(x: 0, y: scene.frame.size.height-12)
-//        scene.addChild(headerBar)
-        
-//        scoreLabel.text = ("Score: \(score)")
-//        scoreLabel.fontColor = SKColor.whiteColor()
-//        scoreLabel.fontSize = 14
-//        scoreLabel.position = CGPoint(x: scene.size.width/2, y: scene.size.height-18)
-//        scoreLabel.zPosition = 1
-//        scene.addChild(scoreLabel)
-        
-//        let lifeLabel = SKLabelNode(text: "Lives: 3")
-//        lifeLabel.fontColor = SKColor.whiteColor()
-//        lifeLabel.fontSize = 14
-//        lifeLabel.position = CGPoint(x: 30, y: scene.size.height-18)
-//        lifeLabel.zPosition = 1
-//        scene.addChild(lifeLabel)
-
         menuLabel.fontColor = SKColor.whiteColor()
         menuLabel.fontSize = 14
         menuLabel.position = CGPoint(x: scene.size.width-50, y: scene.size.height-18)
@@ -90,7 +70,6 @@ class HUD: SKSpriteNode {
     }
     
     func addLives(scene: SKScene, lives: IntegerLiteralType) {
-//        let lifeLabel = SKLabelNode(text: "Lives: \(lives)")
         lifeLabel.text = "Lives: \(lives)"
         lifeLabel.fontColor = SKColor.whiteColor()
         lifeLabel.fontSize = 14
