@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EC3F4D6D-97E9-4875-AD76-0F91246ABDB9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>542674E4BA1AA9DB6ED6E95BEBB0AE9E2B054B17</key>
+		<string>https://git.assembla.com/xis22w16-team5.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Cowlaga/Cowlaga.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>542674E4BA1AA9DB6ED6E95BEBB0AE9E2B054B17</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://git.assembla.com/xis22w16-team5.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>542674E4BA1AA9DB6ED6E95BEBB0AE9E2B054B17</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>542674E4BA1AA9DB6ED6E95BEBB0AE9E2B054B17</string>
+			<key>IDESourceControlWCCName</key>
+			<string>422-addressbook</string>
+		</dict>
+	</array>
+</dict>
+</plist>
