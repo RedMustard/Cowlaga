@@ -20,6 +20,7 @@ class EnemyBullet: Bullet {
         self.physicsBody?.usesPreciseCollisionDetection = true
     }
 
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

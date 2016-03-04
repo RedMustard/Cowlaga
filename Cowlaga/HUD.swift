@@ -18,6 +18,7 @@ class HUD: SKSpriteNode {
     var lifeLabel = SKLabelNode()
     var scoreLabel = SKLabelNode()
 
+    
     init() {
         let texture = SKTexture(imageNamed: "menubar")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
@@ -59,6 +60,7 @@ class HUD: SKSpriteNode {
 
     }
     
+    
     func addScore(scene: SKScene) {
         scoreLabel.text = ("Score: \(score)")
         scoreLabel.fontColor = SKColor.whiteColor()
@@ -69,6 +71,7 @@ class HUD: SKSpriteNode {
 
     }
     
+    
     func addLives(scene: SKScene, lives: IntegerLiteralType) {
         lifeLabel.text = "Lives: \(lives)"
         lifeLabel.fontColor = SKColor.whiteColor()
@@ -78,9 +81,11 @@ class HUD: SKSpriteNode {
         scene.addChild(lifeLabel)
     }
     
+    
     func updateLives() {
         lifeLabel.removeFromParent()
     }
+    
     
     func updateScore() {
         scoreLabel.removeFromParent()

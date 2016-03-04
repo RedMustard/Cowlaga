@@ -12,6 +12,7 @@ class MidEnemy: Enemy {
     private var canFire = true
     var health = 3
     
+    
     override init(imageName: String) {
         super.init(imageName: imageName)
         
@@ -24,9 +25,11 @@ class MidEnemy: Enemy {
         
     }
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     func fireBullet(scene: SKScene) {
         if (!canFire) {
@@ -50,9 +53,11 @@ class MidEnemy: Enemy {
         }
     }
     
+    
     func addHit() {
         health--
     }
+    
     
     private func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
@@ -62,6 +67,7 @@ class MidEnemy: Enemy {
     private func random(min min: CGFloat, max: CGFloat) -> CGFloat {
         return random() * (max - min) + min
     }
+    
     
     func addEnemy(scene: SKScene) {
         // Determine where to spawn the enemy along the Y axis
@@ -82,7 +88,6 @@ class MidEnemy: Enemy {
         let actionMoveDone = SKAction.removeFromParent()
         
         self.runAction(SKAction.sequence([actionMove, actionMoveDone]))
-        
     }
 }
 

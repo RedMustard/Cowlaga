@@ -11,6 +11,7 @@ import SpriteKit
 class BasicEnemy: Enemy {
     private var canFire = true
     
+    
     override init(imageName: String) {
         super.init(imageName: imageName)
         
@@ -22,9 +23,11 @@ class BasicEnemy: Enemy {
         self.physicsBody?.collisionBitMask = PhysicsCategory.None
     }
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     func fireBullet(scene: SKScene) {
         if (!canFire) {
@@ -48,6 +51,7 @@ class BasicEnemy: Enemy {
         }
     }
     
+    
     private func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
@@ -56,6 +60,7 @@ class BasicEnemy: Enemy {
     private func random(min min: CGFloat, max: CGFloat) -> CGFloat {
         return random() * (max - min) + min
     }
+    
     
     func addEnemy(scene: SKScene) {
         // Determine where to spawn the enemy along the Y axis

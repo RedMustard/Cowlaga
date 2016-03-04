@@ -9,7 +9,6 @@
 import SpriteKit
 
 class MenuScene: SKScene {
-    
     let playButton = SKSpriteNode(imageNamed: "play")
     let scoreButton = SKSpriteNode(imageNamed: "play")
     let gameTitle = SKLabelNode()
@@ -21,7 +20,6 @@ class MenuScene: SKScene {
         bgImage.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         self.addChild(bgImage)
         bgImage.zPosition = 0
-        
         
         gameTitle.text = "Cowlaga"
         gameTitle.position = CGPointMake(frame.width/2, frame.height-75)
@@ -35,8 +33,8 @@ class MenuScene: SKScene {
         scoreButton.position = CGPointMake(frame.width/2, frame.height/2-75)
         self.addChild(scoreButton)
         scoreButton.zPosition = 1
-        
     }
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // for each new touch on the screen
@@ -51,6 +49,7 @@ class MenuScene: SKScene {
                     scene.scaleMode = .ResizeFill
                     view.presentScene(scene)
                 }
+                
             } else if node == scoreButton {
                 if let view = view {
                     let scene = ScoreScene(size: view.bounds.size)

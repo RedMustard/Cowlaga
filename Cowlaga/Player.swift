@@ -12,6 +12,7 @@ import SpriteKit
 class Player: SKSpriteNode {
     private var canFire = true
     
+    
     init() {
         let texture = SKTexture(imageNamed: "Spaceship")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
@@ -26,9 +27,11 @@ class Player: SKSpriteNode {
         
     }
 
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     func fireBullet(scene: SKScene) {
         if (!canFire) {
@@ -49,7 +52,6 @@ class Player: SKSpriteNode {
             runAction(waitToEnableFire, completion: {
                 self.canFire = true
             })
-            
         }
     }
 }

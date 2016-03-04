@@ -19,6 +19,7 @@ struct PhysicsCategory {
     static let Border     : UInt32 = 1 << 4
 }
 
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     let hud = HUD()
     let player = Player()
@@ -26,6 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let midEnemy = MidEnemy(imageName: "midEnemy")
     let menu = InGameMenu()
     var lives = 3
+    
     
     func addPlayer() {
         print("Lives\(lives)")
@@ -56,15 +58,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hud.addScore(self)
     }
     
+    
     func updateHud() {
         hud.removeFromParent()
         runAction(SKAction.runBlock(addHud))
     }
     
+    
     func updateScore() {
         hud.updateScore()
         hud.addScore(self)
     }
+    
     
     func pauseGame() {
         addChild(menu)
@@ -72,10 +77,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scene!.paused = true
     }
     
+    
     func enemyFire() {
         basicEnemy.fireBullet(self)
         midEnemy.fireBullet(self)
     }
+    
     
     func enemyHit(enemy: MidEnemy) {
         enemy.addHit()
@@ -83,6 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updateScore()
         print("enemy health: \(enemy.health)")
     }
+    
     
     func midEnemyDead(enemy: MidEnemy)-> Bool {
         if enemy.health == 0 {
@@ -92,10 +100,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     
+    
     func addBasicEnemy() {
         basicEnemy.addEnemy(self)
     }
 
+    
     func addMidEnemy() {
         midEnemy.addEnemy(self)
     }
@@ -109,6 +119,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func random(min min: CGFloat, max: CGFloat) -> CGFloat {
         return random() * (max - min) + min
     }
+    
     
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor()
@@ -166,6 +177,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if node == menu.buttonMenu {
                 if let view = view {
+                    createUserScores()
+                    addScore(score)
+                    score = 0
+                    
                     let scene = MenuScene(size: view.bounds.size)
                     scene.scaleMode = .ResizeFill
                     view.presentScene(scene)
@@ -174,6 +189,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if node == menu.buttonScores {
                 if let view = view {
+                    createUserScores()
+                    addScore(score)
+                    score = 0
+                    
                     let scene = ScoreScene(size: view.bounds.size)
                     scene.scaleMode = .ResizeFill
                     view.presentScene(scene)
@@ -328,8 +347,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score += 100
             updateScore()
         }
-        
-        
     }
     
     
@@ -340,6 +357,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             firstBody = contact.bodyA
             secondBody = contact.bodyB
+        
         } else {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
@@ -357,6 +375,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if score >= 30 {
                 score -= 30
                 updateScore()
+            
             } else {
                 score = 0
                 updateScore()

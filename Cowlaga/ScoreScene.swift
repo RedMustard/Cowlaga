@@ -9,9 +9,9 @@
 import SpriteKit
 
 class ScoreScene: SKScene {
-    
     let backButton = SKSpriteNode(imageNamed: "play")
     let scoreTitle = SKLabelNode()
+    
     
     func scoreList() {
         let oneScore = SKLabelNode(text: "1. \(userScores.stringForKey("1")!)")
@@ -74,7 +74,8 @@ class ScoreScene: SKScene {
         tenScore.fontSize = 18
         self.addChild(tenScore)
         
-    }
+    } // End scoreList
+    
     
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor()
@@ -95,6 +96,7 @@ class ScoreScene: SKScene {
         backButton.zPosition = 1
         
     }
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // for each new touch on the screen

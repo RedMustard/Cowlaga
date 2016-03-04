@@ -14,15 +14,15 @@ import UIKit
 // -- BOSS ENEMY SCORE: 5/HIT, 1000/KILL -- 50 HITS
 // -- WHEN ENEMY DIES, SHOOT 4 PROJECTILES IN NESW DIRECTIONS WHICH DAMAGE ENEMIES/PLAYER
 
-
-
 class Enemy: SKSpriteNode {
     private var canFire = true
+    
     
     init(imageName: String) {
         let texture = SKTexture(imageNamed: imageName)
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

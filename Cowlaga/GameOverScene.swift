@@ -9,9 +9,7 @@
 import SpriteKit
 
 
-
 class GameOverScene: SKScene {
-    
     let backButton = SKSpriteNode(imageNamed: "play")
     let gameOverLabel = SKLabelNode(text: "Game Over.")
     let scoreLabel = SKLabelNode(text: "Your score: \(score)")
@@ -33,6 +31,7 @@ class GameOverScene: SKScene {
         
         score = 0
     }
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // for each new touch on the screen

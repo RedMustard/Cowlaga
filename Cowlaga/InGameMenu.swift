@@ -13,6 +13,7 @@ class InGameMenu: SKSpriteNode {
     let buttonMenu = SKSpriteNode(imageNamed: "play")
     let buttonScores = SKSpriteNode(imageNamed: "play")
     
+    
     init() {
         let texture = SKTexture(imageNamed: "menubox")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
@@ -27,6 +28,7 @@ class InGameMenu: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     func addMenu(scene: SKScene) {
         let pauseLabel = SKLabelNode(text: "Game Paused")
