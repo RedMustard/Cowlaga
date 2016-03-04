@@ -45,7 +45,7 @@ class MenuScene: SKScene {
             
             if node == playButton {
                 if let view = view {
-                    let scene = GameScene(size: view.bounds.size)
+                    let scene = LevelOne(size: view.bounds.size)
                     scene.scaleMode = .ResizeFill
                     view.presentScene(scene)
                 }

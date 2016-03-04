@@ -20,13 +20,17 @@ struct PhysicsCategory {
 }
 
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class LevelOne: SKScene, SKPhysicsContactDelegate {
     let hud = HUD()
     let player = Player()
     let basicEnemy = BasicEnemy(imageName: "basicEnemy")
     let midEnemy = MidEnemy(imageName: "midEnemy")
     let menu = InGameMenu()
     var lives = 3
+    let i = 1
+    
+    var basicEnemyArray = [BasicEnemy]()
+    var midEnemyArray = [MidEnemy]()
     
     
     func addPlayer() {
@@ -79,8 +83,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func enemyFire() {
-        basicEnemy.fireBullet(self)
-        midEnemy.fireBullet(self)
+        
+//        basicEnemy.fireBullet(self)
+//        midEnemy.fireBullet(self)
     }
     
     
@@ -102,12 +107,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func addBasicEnemy() {
-        basicEnemy.addEnemy(self)
+        for i in 0...5 {
+            let i = BasicEnemy(imageName: "basicEnemy")
+            basicEnemyArray.append(i)
+            SKAction.waitForDuration(5.0)
+            i.addEnemy(self)
+        }
     }
 
     
     func addMidEnemy() {
-        midEnemy.addEnemy(self)
+        for i in 0...2 {
+            let i = MidEnemy(imageName: "midEnemy")
+            midEnemyArray.append(i)
+            i.addEnemy(self)
+        }
     }
     
     
@@ -136,7 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Add Player
         runAction(SKAction.runBlock(addPlayer))
         
-        SKAction.waitForDuration(10.0)
+//        SKAction.waitForDuration(10.0)
         
         // Repeatedly add basic enemy until it dies
         runAction(SKAction.repeatActionForever(
@@ -147,12 +161,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ))
         
         // Repeatedly add mid enemy until it dies
-        runAction(SKAction.repeatActionForever(
-            SKAction.sequence([
+//        runAction(SKAction.repeatActionForever(
+//            SKAction.sequence([
+//                SKAction.runBlock(addMidEnemy),
+//                SKAction.waitForDuration(NSTimeInterval (random(min: 8.5, max: 10.0)))
+//                ])
+//            ))
+        
+        addMidEnemy()
+        
+        while midEnemyArray.count > 0 {
+            runAction(SKAction.sequence([
                 SKAction.runBlock(addMidEnemy),
                 SKAction.waitForDuration(NSTimeInterval (random(min: 8.5, max: 10.0)))
-                ])
-            ))
+                ]))
+        }
+        
         
         // Make enemies shoot
         runAction(SKAction.repeatActionForever(
@@ -323,30 +347,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func projectileDidCollideWithMonster(firstBody:SKSpriteNode, secondBody:SKSpriteNode) {
         print("Removed")
         
-        // If collision is with midEnemy, else if player
-        if secondBody == midEnemy {
-            enemyHit(secondBody as! MidEnemy)
-            
-            // If enemy is out of health, remove it. Else remove just the projectile
-            if midEnemyDead(secondBody as! MidEnemy) {
-                firstBody.removeFromParent()
-                secondBody.removeFromParent()
-                score += 250
-                updateScore()
-            } else {
-                firstBody.removeFromParent()
+        var i = 0
+        
+        for index in midEnemyArray {
+            if index == secondBody {
+                print("index = second")
+                enemyHit(secondBody as! MidEnemy)
+                
+                if midEnemyDead(secondBody as! MidEnemy) {
+                    firstBody.removeFromParent()
+                    secondBody.removeFromParent()
+                    midEnemyArray.removeAtIndex(midEnemyArray.indexOf(index)!)
+                    score += 250
+                    updateScore()
+                    
+                } else {
+                    firstBody.removeFromParent()
+                }
+
             }
-            
-        } else if firstBody == player {
-            firstBody.removeFromParent()
-            secondBody.removeFromParent()
-            
-        } else if secondBody == basicEnemy {
-            firstBody.removeFromParent()
-            secondBody.removeFromParent()
-            score += 100
-            updateScore()
+            i++
         }
+//        
+//        // If collision is with midEnemy, else if player
+//        if midEnemyArray.contains(secondBody as! MidEnemy) {
+//            enemyHit(secondBody as! MidEnemy)
+//            
+//            // If enemy is out of health, remove it. Else remove just the projectile
+//            if midEnemyDead(secondBody as! MidEnemy) {
+//                firstBody.removeFromParent()
+//                secondBody.removeFromParent()
+//                score += 250
+//                updateScore()
+//            } else {
+//                firstBody.removeFromParent()
+//            }
+//            
+//        } else if firstBody == player {
+//            firstBody.removeFromParent()
+//            secondBody.removeFromParent()
+//            
+//        } else if secondBody == basicEnemy {
+//            firstBody.removeFromParent()
+//            secondBody.removeFromParent()
+//            score += 100
+//            updateScore()
+//        }
     }
     
     
@@ -370,7 +416,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode,
                 secondBody: secondBody.node as! SKSpriteNode)
             lives--
-            runAction(SKAction.runBlock(addPlayer))
+//            runAction(SKAction.runBlock(addPlayer))
 
             if score >= 30 {
                 score -= 30
