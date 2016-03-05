@@ -10,7 +10,8 @@ import SpriteKit
 
 
 class GameOverScene: SKScene {
-    let backButton = SKSpriteNode(imageNamed: "play")
+    let backButton = SKSpriteNode(imageNamed: "menu_button")
+    let replayButton = SKSpriteNode(imageNamed: "again_button")
     let gameOverLabel = SKLabelNode(text: "Game Over.")
     let scoreLabel = SKLabelNode(text: "Your score: \(score)")
     
@@ -22,6 +23,9 @@ class GameOverScene: SKScene {
         
         backButton.position = CGPointMake(frame.width/2, frame.height/2)
         self.addChild(backButton)
+        
+        replayButton.position = CGPointMake(frame.width/2, frame.height/2-60)
+        self.addChild(replayButton)
         
         scoreLabel.position = CGPointMake(frame.width/2, frame.height-125)
         self.addChild(scoreLabel)

@@ -9,8 +9,8 @@
 import SpriteKit
 
 class MenuScene: SKScene {
-    let playButton = SKSpriteNode(imageNamed: "play")
-    let scoreButton = SKSpriteNode(imageNamed: "play")
+    let playButton = SKSpriteNode(imageNamed: "play_button")
+    let scoreButton = SKSpriteNode(imageNamed: "score_button")
     let gameTitle = SKLabelNode()
     
     
@@ -22,15 +22,15 @@ class MenuScene: SKScene {
         bgImage.zPosition = 0
         
         gameTitle.text = "Cowlaga"
-        gameTitle.position = CGPointMake(frame.width/2, frame.height-75)
+        gameTitle.position = CGPointMake(frame.width/2, frame.height-105)
         self.addChild(gameTitle)
         gameTitle.zPosition = 1
         
-        playButton.position = CGPointMake(frame.width/2, frame.height/2)
+        playButton.position = CGPointMake(frame.width/2, frame.height/2-80)
         self.addChild(playButton)
         playButton.zPosition = 1
         
-        scoreButton.position = CGPointMake(frame.width/2, frame.height/2-75)
+        scoreButton.position = CGPointMake(frame.width/2, frame.height/2-135)
         self.addChild(scoreButton)
         scoreButton.zPosition = 1
     }

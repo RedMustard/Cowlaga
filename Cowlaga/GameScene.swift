@@ -63,8 +63,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 SKAction.runBlock(blinkOff),
                 SKAction.waitForDuration(0.5),
                 SKAction.runBlock(playerNormalMode),
-//                SKAction.waitForDuration(0.5),
-//                SKAction.runBlock(playerNormalMode)
                 ]))
             hud.updateLives()
             hud.addLives(self, lives: lives)

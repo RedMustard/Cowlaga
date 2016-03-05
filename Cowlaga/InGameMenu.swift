@@ -9,9 +9,9 @@
 import SpriteKit
 
 class InGameMenu: SKSpriteNode {
-    let buttonBack = SKSpriteNode(imageNamed: "play")
-    let buttonMenu = SKSpriteNode(imageNamed: "play")
-    let buttonScores = SKSpriteNode(imageNamed: "play")
+    let buttonBack = SKSpriteNode(imageNamed: "back_button")
+    let buttonMenu = SKSpriteNode(imageNamed: "menu_button")
+    let buttonScores = SKSpriteNode(imageNamed: "score_button")
     
     
     init() {
@@ -43,7 +43,7 @@ class InGameMenu: SKSpriteNode {
         buttonMenu.alpha = 2
         self.addChild(buttonMenu)
 
-        buttonScores.position = CGPoint(x: self.size.width/4 - 8, y: self.size.height/2 - 175)
+        buttonScores.position = CGPoint(x: self.size.width/4 - 8, y: self.size.height/2 - 180)
         buttonScores.zPosition = 1
         buttonScores.setScale(1)
         buttonScores.alpha = 2
