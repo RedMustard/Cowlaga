@@ -51,6 +51,15 @@ class GameOverScene: SKScene {
                     view.presentScene(scene)
                 }
             }
+            
+            if node == replayButton {
+                if let view = view {
+                    let scene = GameScene(size: view.bounds.size)
+                    scene.scaleMode = .ResizeFill
+                    view.presentScene(scene)
+                }
+            }
+            
         }
     } // End touchesBegan
 } // End class

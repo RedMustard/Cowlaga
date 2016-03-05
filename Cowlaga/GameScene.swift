@@ -24,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let hud = HUD()
     let player = Player()
     let menu = InGameMenu()
+    let confirm = ConfirmationWindow()
     var lives = 3
     
     var basicEnemyArray = [BasicEnemy]()    // Hold all alive basic enemies
@@ -111,6 +112,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(menu)
         menu.addMenu(self)
         scene!.paused = true
+    }
+    
+    func openConfirm() {
+        menu.addChild(confirm)
     }
     
     
@@ -209,7 +214,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(bgImage)
         
         // Set world physics and gravity
-        scene!.physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRect(x:40, y:0, width: self.frame.width, height: self.frame.height-45))
+        scene!.physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRect(x:40, y:0, width: self.frame.width, height: self.frame.height-30))
         scene!.physicsBody?.categoryBitMask = PhysicsCategory.Border
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
@@ -250,6 +255,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if node == menu.buttonMenu {
                 if let view = view {
+//                    openConfirm()
+                    
+                    // ADD CONFIRMATION SCREEN
+                    
                     createUserScores()
                     addScore(score)
                     score = 0
@@ -262,11 +271,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if node == menu.buttonScores {
                 if let view = view {
+                    
+                    // ADD CONFIRMATION SCREEN
+                    
+                    
+                    
                     createUserScores()
                     addScore(score)
                     score = 0
                     
                     let scene = ScoreScene(size: view.bounds.size)
+                    scene.scaleMode = .ResizeFill
+                    view.presentScene(scene)
+                }
+            }
+            
+            if node == menu.buttonRestart {
+                if let view = view {
+                    
+                    // ADD CONFIRMATION SCREEN
+                    
+                    createUserScores()
+                    addScore(score)
+                    score = 0
+                    
+                    let scene = GameScene(size: view.bounds.size)
                     scene.scaleMode = .ResizeFill
                     view.presentScene(scene)
                 }

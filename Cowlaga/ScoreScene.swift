@@ -9,7 +9,7 @@
 import SpriteKit
 
 class ScoreScene: SKScene {
-    let backButton = SKSpriteNode(imageNamed: "back_button")
+    let backButton = SKSpriteNode(imageNamed: "menu_button")
     let scoreTitle = SKLabelNode()
     
     
