@@ -21,10 +21,10 @@ class GameOverScene: SKScene {
         gameOverLabel.position = CGPointMake(frame.width/2, frame.height-75)
         self.addChild(gameOverLabel)
         
-        backButton.position = CGPointMake(frame.width/2, frame.height/2)
+        backButton.position = CGPointMake(frame.width/2, frame.height/2-80)
         self.addChild(backButton)
         
-        replayButton.position = CGPointMake(frame.width/2, frame.height/2-60)
+        replayButton.position = CGPointMake(frame.width/2, frame.height/2-135)
         self.addChild(replayButton)
         
         scoreLabel.position = CGPointMake(frame.width/2, frame.height-125)

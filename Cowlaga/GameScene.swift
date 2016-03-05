@@ -69,21 +69,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
+    
     func blinkOn() {
         player.alpha = 0.5
     }
+    
+    
     func blinkOff() {
         player.alpha = 0
     }
+    
+    
     func playerGodMode() {
         player.physicsBody?.categoryBitMask = PhysicsCategory.None
         player.alpha = 0.5
     }
     
+    
     func playerNormalMode() {
         player.physicsBody?.categoryBitMask = PhysicsCategory.Player
         player.alpha = 1
     }
+    
     
     func addHud() {
         addChild(hud)
@@ -92,12 +99,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hud.addLives(self, lives: lives)
         hud.addScore(self)
     }
-    
-    
-//    func updateHud() {
-//        hud.removeFromParent()
-//        runAction(SKAction.runBlock(addHud))
-//    }
     
     
     func updateScore() {
@@ -114,7 +115,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func enemyFire() {
-        
         for enemy in basicEnemyArray {
             enemy.fireBullet(self)
         }
@@ -203,6 +203,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor()
+        let bgImage = SKSpriteNode(imageNamed: "bg")
+        bgImage.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        bgImage.zPosition = -1
+        self.addChild(bgImage)
         
         // Set world physics and gravity
         scene!.physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRect(x:40, y:0, width: self.frame.width, height: self.frame.height-45))
@@ -217,35 +221,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runAction(SKAction.runBlock(addPlayer))
         
         
-        runAction(SKAction.sequence([SKAction.waitForDuration(1.0), SKAction.runBlock(addEnemyActions)
-        // Repeatedly add 6 basic enemies at random intervals
-//        for i in 0...8 {
-//            let i = BasicEnemy(imageName: "basicEnemy")
-//            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 2.0, max: 10.0))))
-//            runAction(SKAction.repeatActionForever(
-//                SKAction.sequence([
-//                    SKAction.runBlock({
-//                        self.addBasicEnemy(i)
-//                    }),
-//                    SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 10.0)))
-//                ])
-//            ))
-//        }
-//        
-//        // Repeatedly add 2 basic enemies at random intervals
-//        for i in 0...1 {
-//            let i = MidEnemy(imageName: "midEnemy")
-//            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 5.0, max: 9.0))))
-//            runAction(SKAction.repeatActionForever(
-//                SKAction.sequence([
-//                    SKAction.runBlock({
-//                        self.addMidEnemy(i)
-//                    }),
-//                    SKAction.waitForDuration(NSTimeInterval (random(min: 15.0, max: 25.0)))
-//                ])
-//            ))
-//        }
-        ]))
+        runAction(SKAction.sequence([
+            SKAction.waitForDuration(1.0),
+            SKAction.runBlock(addEnemyActions)
+            ])
+        )
+        
         // Make enemies shoot
         runAction(SKAction.repeatActionForever(
             SKAction.sequence([
