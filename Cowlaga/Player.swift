@@ -48,7 +48,7 @@ class Player: SKSpriteNode {
             
             projectile.runAction(SKAction.sequence([moveBulletAction, removeBulletAction]))
             
-            let waitToEnableFire = SKAction.waitForDuration(0.3)
+            let waitToEnableFire = SKAction.waitForDuration(0.2)
             runAction(waitToEnableFire, completion: {
                 self.canFire = true
             })

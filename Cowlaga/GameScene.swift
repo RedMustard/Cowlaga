@@ -23,38 +23,69 @@ struct PhysicsCategory {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     let hud = HUD()
     let player = Player()
-    let basicEnemy = BasicEnemy(imageName: "basicEnemy")
-    let midEnemy = MidEnemy(imageName: "midEnemy")
     let menu = InGameMenu()
     var lives = 3
-    let i = 1
     
-    var basicEnemyArray = [BasicEnemy]()
-    var midEnemyArray = [MidEnemy]()
-    var bodiesToRemove = [SKSpriteNode]()
-    var shouldRemoveBodies = false
-    
+    var basicEnemyArray = [BasicEnemy]()    // Hold all alive basic enemies
+    var midEnemyArray = [MidEnemy]()        // Hold all alive mid enemies
+    var bodiesToRemove = [SKSpriteNode]()   // Hold all dead enemies waiting to be removed
+    var shouldRemoveBodies = false          // Flag to determine if there are enemies waiting to be removed
+
     
     func addPlayer() {
-        print("Lives\(lives)")
-        
-        // Call Game Over
-        if lives == 0 {
+        // If no more lives, call Game Over
+        if lives <= 0 {
             if let view = view {
                 let scene = GameOverScene(size: view.bounds.size)
                 scene.scaleMode = .ResizeFill
                 view.presentScene(scene)
             }
         }
-            
+        // Else respawn player
         else {
             addChild(player)
             player.position = CGPoint(x: player.size.width, y: self.frame.height/2)
+            runAction(SKAction.sequence([
+                SKAction.runBlock(playerGodMode),
+                SKAction.waitForDuration(0.5),
+                SKAction.runBlock(blinkOff),
+                SKAction.waitForDuration(0.5),
+                SKAction.runBlock(blinkOn),
+                SKAction.waitForDuration(0.5),
+                SKAction.runBlock(blinkOff),
+                SKAction.waitForDuration(0.5),
+                SKAction.runBlock(blinkOn),
+                SKAction.waitForDuration(0.5),
+                SKAction.runBlock(blinkOff),
+                SKAction.waitForDuration(0.5),
+                SKAction.runBlock(blinkOn),
+                SKAction.waitForDuration(0.5),
+                SKAction.runBlock(blinkOff),
+                SKAction.waitForDuration(0.5),
+                SKAction.runBlock(playerNormalMode),
+//                SKAction.waitForDuration(0.5),
+//                SKAction.runBlock(playerNormalMode)
+                ]))
             hud.updateLives()
             hud.addLives(self, lives: lives)
         }
     }
 
+    func blinkOn() {
+        player.alpha = 0.5
+    }
+    func blinkOff() {
+        player.alpha = 0
+    }
+    func playerGodMode() {
+        player.physicsBody?.categoryBitMask = PhysicsCategory.None
+        player.alpha = 0.5
+    }
+    
+    func playerNormalMode() {
+        player.physicsBody?.categoryBitMask = PhysicsCategory.Player
+        player.alpha = 1
+    }
     
     func addHud() {
         addChild(hud)
@@ -65,10 +96,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    func updateHud() {
-        hud.removeFromParent()
-        runAction(SKAction.runBlock(addHud))
-    }
+//    func updateHud() {
+//        hud.removeFromParent()
+//        runAction(SKAction.runBlock(addHud))
+//    }
     
     
     func updateScore() {
@@ -92,9 +123,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for enemy in midEnemyArray {
             enemy.fireBullet(self)
         }
-        
-//        basicEnemy.fireBullet(self)
-//        midEnemy.fireBullet(self)
     }
     
     
@@ -133,7 +161,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addEnemyActions() {
-        for i in 0...4 {
+        // Add basic level enemies after 2-10 seconds. Repeatedly spawn every 5-10 seconds
+        for i in 0...7 {
             let i = BasicEnemy(imageName: "basicEnemy")
             runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 2.0, max: 10.0))))
             runAction(SKAction.repeatActionForever(
@@ -146,19 +175,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 ))
         }
         
-        // Repeatedly add increasing amount of mid enemies at random intervals over time
+        // Add mid level enemies after 60-90 seconds. Repeatedly spawn every 10-15 seconds
         for i in 0...2 {
             let i = MidEnemy(imageName: "midEnemy")
-            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 60.0, max: 90.0))))
-            runAction(SKAction.repeatActionForever(
-                SKAction.sequence([
-                    SKAction.waitForDuration(NSTimeInterval (random(min: 10.0, max: 15.0))),
-                    SKAction.runBlock({
-                        self.addMidEnemy(i)
-                    })
-//                    SKAction.waitForDuration(NSTimeInterval (random(min: 15.0, max: 25.0)))
+            runAction(SKAction.sequence([
+                SKAction.waitForDuration(NSTimeInterval (random(min: 60.0, max: 90.0))),
+                SKAction.repeatActionForever(
+                    SKAction.sequence([
+                        SKAction.waitForDuration(NSTimeInterval (random(min: 10.0, max: 20.0))),
+                        SKAction.runBlock({
+                            self.addMidEnemy(i)
+                        })
                     ])
-                ))
+                )
+            ]))
         }
 
     }

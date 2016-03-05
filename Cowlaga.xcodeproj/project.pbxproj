@@ -46,7 +46,7 @@
 		F60D482A1C67B6CE00B4FA9A /* Cowlaga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cowlaga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60D482E1C67B6CE00B4FA9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F60D482F1C67B6CE00B4FA9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F60D48311C67B6CE00B4FA9A /* LevelOne.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelOne.sks; sourceTree = "<group>"; };
+		F60D48311C67B6CE00B4FA9A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		F60D48331C67B6CE00B4FA9A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		F60D48351C67B6CE00B4FA9A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		F60D48381C67B6CE00B4FA9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				F60D482F1C67B6CE00B4FA9A /* AppDelegate.swift */,
-				F60D48311C67B6CE00B4FA9A /* LevelOne.sks */,
+				F60D48311C67B6CE00B4FA9A /* GameScene.sks */,
 				F60D48331C67B6CE00B4FA9A /* GameScene.swift */,
 				F6439E6E1C85505C00FB7A52 /* InGameMenu.swift */,
 				F6868EF81C7FBC7C00E6F4CB /* HUD.swift */,
