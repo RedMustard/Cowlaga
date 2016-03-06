@@ -10,11 +10,13 @@ import UIKit
 import SpriteKit
 
 var score = IntegerLiteralType()
+var scoreFlag = false
 let userScores = NSUserDefaults.standardUserDefaults()
 
-func createUserScores() {
+
+func initUserScores() {
     print("Create User Scores")
-    if userScores.objectForKey("10") == nil {
+    if userScores.objectForKey("10") == nil || scoreFlag == true {
         userScores.setInteger(0, forKey: "1")
         userScores.setInteger(0, forKey: "2")
         userScores.setInteger(0, forKey: "3")
@@ -25,6 +27,7 @@ func createUserScores() {
         userScores.setInteger(0, forKey: "8")
         userScores.setInteger(0, forKey: "9")
         userScores.setInteger(0, forKey: "10")
+        scoreFlag = false
     }
 }
 

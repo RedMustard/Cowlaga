@@ -10,7 +10,7 @@ import SpriteKit
 
 
 class Player: SKSpriteNode {
-    private var canFire = true
+    var canFire = true
     
     
     init() {
@@ -48,7 +48,7 @@ class Player: SKSpriteNode {
             
             projectile.runAction(SKAction.sequence([moveBulletAction, removeBulletAction]))
             
-            let waitToEnableFire = SKAction.waitForDuration(0.2)
+            let waitToEnableFire = SKAction.waitForDuration(0.25)
             runAction(waitToEnableFire, completion: {
                 self.canFire = true
             })

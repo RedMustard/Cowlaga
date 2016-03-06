@@ -30,7 +30,7 @@ class GameOverScene: SKScene {
         scoreLabel.position = CGPointMake(frame.width/2, frame.height-125)
         self.addChild(scoreLabel)
         
-        createUserScores()
+        initUserScores()
         addScore(score)
         
         score = 0

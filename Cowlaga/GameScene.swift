@@ -169,7 +169,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addEnemyActions() {
         // Add basic level enemies after 2-10 seconds. Repeatedly spawn every 5-10 seconds
-        for i in 0...7 {
+        for _ in 0...7 {
             let i = BasicEnemy(imageName: "basicEnemy")
             runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 2.0, max: 10.0))))
             runAction(SKAction.repeatActionForever(
@@ -182,11 +182,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 ))
         }
         
-        // Add mid level enemies after 60-90 seconds. Repeatedly spawn every 10-15 seconds
-        for i in 0...2 {
+        // Add mid level enemies after 45-75 seconds. Repeatedly spawn every 10-15 seconds
+        for _ in 0...2 {
             let i = MidEnemy(imageName: "midEnemy")
             runAction(SKAction.sequence([
-                SKAction.waitForDuration(NSTimeInterval (random(min: 60.0, max: 90.0))),
+                SKAction.waitForDuration(NSTimeInterval (random(min: 45.0, max: 75.0))),
                 SKAction.repeatActionForever(
                     SKAction.sequence([
                         SKAction.waitForDuration(NSTimeInterval (random(min: 10.0, max: 20.0))),
@@ -271,7 +271,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if prevNodeMenu == true {
                     if let view = view {
                         prevNodeMenu = false
-                        createUserScores()
+                        initUserScores()
                         addScore(score)
                         score = 0
                         
@@ -282,7 +282,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 } else if prevNodeScore == true {
                     if let view = view {
                         prevNodeScore = false
-                        createUserScores()
+                        initUserScores()
                         addScore(score)
                         score = 0
                     
@@ -294,7 +294,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 } else if prevNodeRestart == true {
                     if let view = view {
                         prevNodeRestart = false
-                        createUserScores()
+                        initUserScores()
                         addScore(score)
                         score = 0
                     
@@ -342,7 +342,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         touchesEndedOrCancelled(touches, withEvent: event)
         
         let touch = touches.first
-        let touchLocation = touch!.locationInNode(self)
+        let _ = touch!.locationInNode(self)
     }
     
     

@@ -10,68 +10,70 @@ import SpriteKit
 
 class ScoreScene: SKScene {
     let backButton = SKSpriteNode(imageNamed: "menu_button")
+    let resetButton = SKSpriteNode(imageNamed: "reset_button")
     let scoreTitle = SKLabelNode()
+    let confirm = ResetConfirmationWindow()
     
     
     func scoreList() {
-        let oneScore = SKLabelNode(text: "1. \(userScores.stringForKey("1")!)")
-        oneScore.position = CGPointMake(frame.width/2, frame.height - 65)
+        let oneScore = SKLabelNode(text: "1.  \(userScores.stringForKey("1")!)")
+        oneScore.position = CGPointMake(frame.width/2 - 60, frame.height - 75)
         oneScore.zPosition = 1
-        oneScore.fontSize = 18
+        oneScore.fontSize = 22
         self.addChild(oneScore)
         
-        let twoScore = SKLabelNode(text: "2. \(userScores.stringForKey("2")!)")
-        twoScore.position = CGPointMake(frame.width/2, frame.height - 90)
+        let twoScore = SKLabelNode(text: "2.  \(userScores.stringForKey("2")!)")
+        twoScore.position = CGPointMake(frame.width/2 - 60, frame.height - 110)
         twoScore.zPosition = 1
-        twoScore.fontSize = 18
+        twoScore.fontSize = 22
         self.addChild(twoScore)
         
-        let thrScore = SKLabelNode(text: "3. \(userScores.stringForKey("3")!)")
-        thrScore.position = CGPointMake(frame.width/2, frame.height - 115)
+        let thrScore = SKLabelNode(text: "3.  \(userScores.stringForKey("3")!)")
+        thrScore.position = CGPointMake(frame.width/2 - 60, frame.height - 145)
         thrScore.zPosition = 1
-        thrScore.fontSize = 18
+        thrScore.fontSize = 22
         self.addChild(thrScore)
         
-        let fouScore = SKLabelNode(text: "4. \(userScores.stringForKey("4")!)")
-        fouScore.position = CGPointMake(frame.width/2, frame.height - 140)
+        let fouScore = SKLabelNode(text: "4.  \(userScores.stringForKey("4")!)")
+        fouScore.position = CGPointMake(frame.width/2 - 60, frame.height - 180)
         fouScore.zPosition = 1
-        fouScore.fontSize = 18
+        fouScore.fontSize = 22
         self.addChild(fouScore)
         
-        let fivScore = SKLabelNode(text: "5. \(userScores.stringForKey("5")!)")
-        fivScore.position = CGPointMake(frame.width/2, frame.height - 165)
+        let fivScore = SKLabelNode(text: "5.  \(userScores.stringForKey("5")!)")
+        fivScore.position = CGPointMake(frame.width/2 - 60, frame.height - 215)
         fivScore.zPosition = 1
-        fivScore.fontSize = 18
+        fivScore.fontSize = 22
         self.addChild(fivScore)
         
-        let sixScore = SKLabelNode(text: "6. \(userScores.stringForKey("6")!)")
-        sixScore.position = CGPointMake(frame.width/2, frame.height - 190)
+        let sixScore = SKLabelNode(text: "6.  \(userScores.stringForKey("6")!)")
+        sixScore.position = CGPointMake(frame.width/2 + 60, frame.height - 75)
         sixScore.zPosition = 1
-        sixScore.fontSize = 18
+        sixScore.fontSize = 22
         self.addChild(sixScore)
         
-        let sevScore = SKLabelNode(text: "7. \(userScores.stringForKey("7")!)")
-        sevScore.position = CGPointMake(frame.width/2, frame.height - 215)
+        let sevScore = SKLabelNode(text: "7.  \(userScores.stringForKey("7")!)")
+        sevScore.position = CGPointMake(frame.width/2 + 60, frame.height - 110)
         sevScore.zPosition = 1
-        sevScore.fontSize = 18
+        sevScore.fontSize = 22
         self.addChild(sevScore)
         
-        let eigScore = SKLabelNode(text: "8. \(userScores.stringForKey("8")!)")
-        eigScore.position = CGPointMake(frame.width/2, frame.height - 240)
+        let eigScore = SKLabelNode(text: "8.  \(userScores.stringForKey("8")!)")
+        eigScore.position = CGPointMake(frame.width/2 + 60, frame.height - 145)
         eigScore.zPosition = 1
-        eigScore.fontSize = 18
+        eigScore.fontSize = 22
         self.addChild(eigScore)
         
-        let ninScore = SKLabelNode(text: "9. \(userScores.stringForKey("9")!)")
-        ninScore.position = CGPointMake(frame.width/2, frame.height - 265)
+        let ninScore = SKLabelNode(text: "9.  \(userScores.stringForKey("9")!)")
+        ninScore.position = CGPointMake(frame.width/2 + 60, frame.height - 180)
         ninScore.zPosition = 1
-        ninScore.fontSize = 18
+        ninScore.fontSize = 22
         self.addChild(ninScore)
         
-        let tenScore = SKLabelNode(text: "10. \(userScores.stringForKey("10")!)")
-        tenScore.position = CGPointMake(frame.width/2, frame.height - 290)
+        let tenScore = SKLabelNode(text: "10.  \(userScores.stringForKey("10")!)")
+        tenScore.position = CGPointMake(frame.width/2 + 60, frame.height - 215)
         tenScore.zPosition = 1
-        tenScore.fontSize = 18
+        tenScore.fontSize = 22
         self.addChild(tenScore)
         
     } // End scoreList
@@ -91,9 +93,13 @@ class ScoreScene: SKScene {
         
         scoreList()
         
-        backButton.position = CGPointMake(frame.width/2, frame.height/8)
+        backButton.position = CGPointMake(frame.width/2, frame.height/2 - 80)
         self.addChild(backButton)
         backButton.zPosition = 1
+        
+        resetButton.position = CGPointMake(frame.width/2, frame.height/2 - 135)
+        self.addChild(resetButton)
+        resetButton.zPosition = 1
         
     }
     
@@ -111,6 +117,19 @@ class ScoreScene: SKScene {
                     scene.scaleMode = .ResizeFill
                     view.presentScene(scene)
                 }
+            }
+            
+            if node == resetButton {
+                self.addChild(confirm)
+            }
+            
+            if node == confirm.buttonCancel {
+                confirm.removeFromParent()
+            }
+            
+            if node == confirm.buttonOkay {
+                scoreFlag = true
+                initUserScores()
             }
         }
     } // End touchesBegan
