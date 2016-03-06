@@ -14,7 +14,7 @@ class HUD: SKSpriteNode {
     let buttonDirDown = SKSpriteNode(imageNamed: "button_dir_down")
     var pressedButtons = [SKSpriteNode]()
     
-    let menuLabel = SKLabelNode(text: "Menu")
+    let menuLabel = SKSpriteNode(imageNamed: "inMenu_button")
     var lifeLabel = SKLabelNode()
     var scoreLabel = SKLabelNode()
 
@@ -51,10 +51,9 @@ class HUD: SKSpriteNode {
     
     
     func addInfo(scene: SKScene) {
-        menuLabel.fontColor = SKColor.whiteColor()
-        menuLabel.fontSize = 14
-        menuLabel.position = CGPoint(x: scene.size.width-50, y: scene.size.height-18)
+        menuLabel.position = CGPoint(x: scene.size.width-35, y: scene.size.height-12)
         menuLabel.zPosition = 1
+        menuLabel.setScale(0.5)
         scene.addChild(menuLabel)
         
 
