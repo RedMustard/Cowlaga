@@ -31,6 +31,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var midEnemyArray = [MidEnemy]()        // Hold all alive mid enemies
     var bodiesToRemove = [SKSpriteNode]()   // Hold all dead enemies waiting to be removed
     var shouldRemoveBodies = false          // Flag to determine if there are enemies waiting to be removed
+    
+    var prevNodeMenu = false                // Flag for confirmation window
+    var prevNodeScore = false               // Flag for confirmation window
+    var prevNodeRestart = false             // Flag for confirmation window
 
     
     func addPlayer() {
@@ -110,7 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func pauseGame() {
         addChild(menu)
-        menu.addMenu(self)
+//        menu.addMenu(self)
         scene!.paused = true
     }
     
@@ -249,62 +253,73 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let location = touch.locationInNode(self)
             let node = self.nodeAtPoint(location)
             
+            // IN-GAME MENU BUTTONS
             if node == hud.menuLabel {
                 runAction(SKAction.runBlock(pauseGame))
             }
             
             if node == menu.buttonMenu {
-                if let view = view {
-//                    openConfirm()
+                openConfirm()
+                prevNodeMenu = true
+            }
+            
+            if node == confirm.buttonCancel {
+                confirm.removeFromParent()
+            }
+            
+            if node == confirm.buttonOkay {
+                if prevNodeMenu == true {
+                    if let view = view {
+                        prevNodeMenu = false
+                        createUserScores()
+                        addScore(score)
+                        score = 0
+                        
+                        let scene = MenuScene(size: view.bounds.size)
+                        scene.scaleMode = .ResizeFill
+                        view.presentScene(scene)
+                    }
+                } else if prevNodeScore == true {
+                    if let view = view {
+                        prevNodeScore = false
+                        createUserScores()
+                        addScore(score)
+                        score = 0
                     
-                    // ADD CONFIRMATION SCREEN
+                        let scene = ScoreScene(size: view.bounds.size)
+                        scene.scaleMode = .ResizeFill
+                        view.presentScene(scene)
+                    }
                     
-                    createUserScores()
-                    addScore(score)
-                    score = 0
+                } else if prevNodeRestart == true {
+                    if let view = view {
+                        prevNodeRestart = false
+                        createUserScores()
+                        addScore(score)
+                        score = 0
                     
-                    let scene = MenuScene(size: view.bounds.size)
-                    scene.scaleMode = .ResizeFill
-                    view.presentScene(scene)
+                        let scene = GameScene(size: view.bounds.size)
+                        scene.scaleMode = .ResizeFill
+                        view.presentScene(scene)
+                    }
                 }
             }
             
             if node == menu.buttonScores {
-                if let view = view {
-                    
-                    // ADD CONFIRMATION SCREEN
-                    
-                    
-                    
-                    createUserScores()
-                    addScore(score)
-                    score = 0
-                    
-                    let scene = ScoreScene(size: view.bounds.size)
-                    scene.scaleMode = .ResizeFill
-                    view.presentScene(scene)
-                }
+                openConfirm()
+                prevNodeScore = true
             }
             
             if node == menu.buttonRestart {
-                if let view = view {
-                    
-                    // ADD CONFIRMATION SCREEN
-                    
-                    createUserScores()
-                    addScore(score)
-                    score = 0
-                    
-                    let scene = GameScene(size: view.bounds.size)
-                    scene.scaleMode = .ResizeFill
-                    view.presentScene(scene)
-                }
+                openConfirm()
+                prevNodeRestart = true
             }
             
             if node == menu.buttonBack {
                 menu.removeFromParent()
                 scene!.paused = false
             }
+            // END IN-GAME MENU BUTTONS
             
             for button in [hud.buttonDirUp, hud.buttonDirDown, hud.buttonShoot] {
                 if button.containsPoint(location) && hud.pressedButtons.indexOf(button) == nil {
@@ -320,7 +335,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 button.alpha = 0.8
             }
         }
-    }
+    } // End touchesBegan
     
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -511,7 +526,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode,
                 secondBody: secondBody.node as! SKSpriteNode)
             lives--
-//            runAction(SKAction.runBlock(addPlayer))
 
             if score >= 30 {
                 score -= 30

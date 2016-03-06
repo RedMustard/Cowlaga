@@ -17,10 +17,13 @@ class ConfirmationWindow: SKSpriteNode {
         let texture = SKTexture(imageNamed: "menubox")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         
-        self.size = CGSize(width: 400, height: 200)
-        self.position = CGPoint(x: 335, y: 140)
+        self.size = CGSize(width: 400, height: 220)
+        self.position = CGPoint(x: 330, y: 135)
         self.zPosition = 2
         self.alpha = 1.5
+        
+        addMenu()
+        
     }
     
     
@@ -29,21 +32,21 @@ class ConfirmationWindow: SKSpriteNode {
     }
     
     
-    func addMenu(scene: SKScene) {
-        confirmationLabel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+    func addMenu() {
+        confirmationLabel.position = CGPoint(x: self.size.width/2 - 200 , y: self.size.height/2 - 45)
         confirmationLabel.zPosition = 3
-        confirmationLabel.setScale(1)
+        confirmationLabel.fontSize = 18
         confirmationLabel.alpha = 2
         self.addChild(confirmationLabel)
         
         
-        buttonOkay.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        buttonOkay.position = CGPoint(x: self.size.width/2 - 200, y: self.size.height/2 - 100)
         buttonOkay.zPosition = 3
         buttonOkay.setScale(1)
         buttonOkay.alpha = 2
         self.addChild(buttonOkay)
         
-        buttonCancel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        buttonCancel.position = CGPoint(x: self.size.width/2 - 200, y: self.size.height/2 - 155)
         buttonCancel.zPosition = 3
         buttonCancel.setScale(1)
         buttonCancel.alpha = 2

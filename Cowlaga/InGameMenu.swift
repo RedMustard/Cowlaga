@@ -25,6 +25,8 @@ class InGameMenu: SKSpriteNode {
         self.position = CGPoint(x: 0, y: 0)
         self.zPosition = 1
         self.alpha = 0.7
+        
+        addMenu()
     }
     
     
@@ -33,7 +35,7 @@ class InGameMenu: SKSpriteNode {
     }
     
     
-    func addMenu(scene: SKScene) {
+    func addMenu() {
         let pauseLabel = SKLabelNode(text: "Game Paused")
         pauseLabel.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 60)
         pauseLabel.alpha = 2
