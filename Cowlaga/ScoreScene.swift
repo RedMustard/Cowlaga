@@ -29,61 +29,71 @@ class ScoreScene: SKScene {
     
     func scoreList() {
         oneScore.text = "1.  \(userScores.stringForKey("1")!)"
-        oneScore.position = CGPointMake(frame.width/2 - 60, frame.height - 75)
+        oneScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        oneScore.position = CGPointMake(frame.width/2 - 85, frame.height - 75)
         oneScore.zPosition = 1
         oneScore.fontSize = 22
         self.addChild(oneScore)
         
         twoScore.text = "2.  \(userScores.stringForKey("2")!)"
-        twoScore.position = CGPointMake(frame.width/2 - 60, frame.height - 110)
+        twoScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        twoScore.position = CGPointMake(frame.width/2 - 85, frame.height - 110)
         twoScore.zPosition = 1
         twoScore.fontSize = 22
         self.addChild(twoScore)
         
         thrScore.text = "3.  \(userScores.stringForKey("3")!)"
-        thrScore.position = CGPointMake(frame.width/2 - 60, frame.height - 145)
+        thrScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        thrScore.position = CGPointMake(frame.width/2 - 85, frame.height - 145)
         thrScore.zPosition = 1
         thrScore.fontSize = 22
         self.addChild(thrScore)
         
         fouScore.text = "4.  \(userScores.stringForKey("4")!)"
-        fouScore.position = CGPointMake(frame.width/2 - 60, frame.height - 180)
+        fouScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        fouScore.position = CGPointMake(frame.width/2 - 85, frame.height - 180)
         fouScore.zPosition = 1
         fouScore.fontSize = 22
         self.addChild(fouScore)
         
         fivScore.text = "5.  \(userScores.stringForKey("5")!)"
-        fivScore.position = CGPointMake(frame.width/2 - 60, frame.height - 215)
+        fivScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        fivScore.position = CGPointMake(frame.width/2 - 85, frame.height - 215)
         fivScore.zPosition = 1
         fivScore.fontSize = 22
         self.addChild(fivScore)
         
         sixScore.text = "6.  \(userScores.stringForKey("6")!)"
-        sixScore.position = CGPointMake(frame.width/2 + 60, frame.height - 75)
+        sixScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        sixScore.position = CGPointMake(frame.width/2 + 45, frame.height - 75)
         sixScore.zPosition = 1
         sixScore.fontSize = 22
         self.addChild(sixScore)
         
         sevScore.text = "7.  \(userScores.stringForKey("7")!)"
-        sevScore.position = CGPointMake(frame.width/2 + 60, frame.height - 110)
+        sevScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        sevScore.position = CGPointMake(frame.width/2 + 45, frame.height - 110)
         sevScore.zPosition = 1
         sevScore.fontSize = 22
         self.addChild(sevScore)
         
         eigScore.text = "8.  \(userScores.stringForKey("8")!)"
-        eigScore.position = CGPointMake(frame.width/2 + 60, frame.height - 145)
+        eigScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        eigScore.position = CGPointMake(frame.width/2 + 45, frame.height - 145)
         eigScore.zPosition = 1
         eigScore.fontSize = 22
         self.addChild(eigScore)
         
         ninScore.text = "9.  \(userScores.stringForKey("9")!)"
-        ninScore.position = CGPointMake(frame.width/2 + 60, frame.height - 180)
+        ninScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        ninScore.position = CGPointMake(frame.width/2 + 45, frame.height - 180)
         ninScore.zPosition = 1
         ninScore.fontSize = 22
         self.addChild(ninScore)
         
         tenScore.text = "10.  \(userScores.stringForKey("10")!)"
-        tenScore.position = CGPointMake(frame.width/2 + 60, frame.height - 215)
+        tenScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        tenScore.position = CGPointMake(frame.width/2 + 45, frame.height - 215)
         tenScore.zPosition = 1
         tenScore.fontSize = 22
         self.addChild(tenScore)

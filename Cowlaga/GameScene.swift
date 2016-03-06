@@ -464,6 +464,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if index == secondBody {
                 print("index = second")
                 enemyHit(secondBody as! MidEnemy)
+                updateScore()
                 
                 if midEnemyDead(secondBody as! MidEnemy) {
                     bodiesToRemove.append(firstBody)
@@ -491,7 +492,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bodiesToRemove.append(secondBody)
                 shouldRemoveBodies = true
                 basicEnemyArray.removeAtIndex(basicEnemyArray.indexOf(index)!)
-                score += 100
+                score += 110
                 updateScore()
             }
             i++
