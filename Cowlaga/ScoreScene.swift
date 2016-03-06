@@ -15,74 +15,74 @@ class ScoreScene: SKScene {
     let confirm = ResetConfirmationWindow()
     
     
-    let oneScore = SKLabelNode(text: "1.  \(userScores.stringForKey("1")!)")
-    let twoScore = SKLabelNode(text: "2.  \(userScores.stringForKey("2")!)")
-    let thrScore = SKLabelNode(text: "3.  \(userScores.stringForKey("3")!)")
-    let fouScore = SKLabelNode(text: "4.  \(userScores.stringForKey("4")!)")
-    let fivScore = SKLabelNode(text: "5.  \(userScores.stringForKey("5")!)")
-    let sixScore = SKLabelNode(text: "6.  \(userScores.stringForKey("6")!)")
-    let sevScore = SKLabelNode(text: "7.  \(userScores.stringForKey("7")!)")
-    let eigScore = SKLabelNode(text: "8.  \(userScores.stringForKey("8")!)")
-    let ninScore = SKLabelNode(text: "9.  \(userScores.stringForKey("9")!)")
-    let tenScore = SKLabelNode(text: "10.  \(userScores.stringForKey("10")!)")
+    let oneScore = SKLabelNode()
+    let twoScore = SKLabelNode()
+    let thrScore = SKLabelNode()
+    let fouScore = SKLabelNode()
+    let fivScore = SKLabelNode()
+    let sixScore = SKLabelNode()
+    let sevScore = SKLabelNode()
+    let eigScore = SKLabelNode()
+    let ninScore = SKLabelNode()
+    let tenScore = SKLabelNode()
     
     
     func scoreList() {
-
+        oneScore.text = "1.  \(userScores.stringForKey("1")!)"
         oneScore.position = CGPointMake(frame.width/2 - 60, frame.height - 75)
         oneScore.zPosition = 1
         oneScore.fontSize = 22
         self.addChild(oneScore)
         
-        
+        twoScore.text = "2.  \(userScores.stringForKey("2")!)"
         twoScore.position = CGPointMake(frame.width/2 - 60, frame.height - 110)
         twoScore.zPosition = 1
         twoScore.fontSize = 22
         self.addChild(twoScore)
         
-        
+        thrScore.text = "3.  \(userScores.stringForKey("3")!)"
         thrScore.position = CGPointMake(frame.width/2 - 60, frame.height - 145)
         thrScore.zPosition = 1
         thrScore.fontSize = 22
         self.addChild(thrScore)
         
-        
+        fouScore.text = "4.  \(userScores.stringForKey("4")!)"
         fouScore.position = CGPointMake(frame.width/2 - 60, frame.height - 180)
         fouScore.zPosition = 1
         fouScore.fontSize = 22
         self.addChild(fouScore)
         
-        
+        fivScore.text = "5.  \(userScores.stringForKey("5")!)"
         fivScore.position = CGPointMake(frame.width/2 - 60, frame.height - 215)
         fivScore.zPosition = 1
         fivScore.fontSize = 22
         self.addChild(fivScore)
         
-        
+        sixScore.text = "6.  \(userScores.stringForKey("6")!)"
         sixScore.position = CGPointMake(frame.width/2 + 60, frame.height - 75)
         sixScore.zPosition = 1
         sixScore.fontSize = 22
         self.addChild(sixScore)
         
-        
+        sevScore.text = "7.  \(userScores.stringForKey("7")!)"
         sevScore.position = CGPointMake(frame.width/2 + 60, frame.height - 110)
         sevScore.zPosition = 1
         sevScore.fontSize = 22
         self.addChild(sevScore)
         
-        
+        eigScore.text = "8.  \(userScores.stringForKey("8")!)"
         eigScore.position = CGPointMake(frame.width/2 + 60, frame.height - 145)
         eigScore.zPosition = 1
         eigScore.fontSize = 22
         self.addChild(eigScore)
         
-        
+        ninScore.text = "9.  \(userScores.stringForKey("9")!)"
         ninScore.position = CGPointMake(frame.width/2 + 60, frame.height - 180)
         ninScore.zPosition = 1
         ninScore.fontSize = 22
         self.addChild(ninScore)
         
-        
+        tenScore.text = "10.  \(userScores.stringForKey("10")!)"
         tenScore.position = CGPointMake(frame.width/2 + 60, frame.height - 215)
         tenScore.zPosition = 1
         tenScore.fontSize = 22
@@ -152,6 +152,7 @@ class ScoreScene: SKScene {
             }
             
             if node == confirm.buttonOkay {
+                confirm.removeFromParent()
                 scoreFlag = true
                 initUserScores()
                 removeScoreList()
