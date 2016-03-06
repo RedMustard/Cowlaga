@@ -17,6 +17,10 @@ class GameOverScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor()
+        let bgImage = SKSpriteNode(imageNamed: "bg")
+        bgImage.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        bgImage.zPosition = -1
+        self.addChild(bgImage)
         
         gameOverLabel.position = CGPointMake(frame.width/2, frame.height-75)
         self.addChild(gameOverLabel)

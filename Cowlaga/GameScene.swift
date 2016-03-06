@@ -182,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 ))
         }
         
-        // Add mid level enemies after 45-75 seconds. Repeatedly spawn every 10-15 seconds
+        // Add mid level enemies after 45-75 seconds. Repeatedly spawn every 10-20 seconds
         for _ in 0...2 {
             let i = MidEnemy(imageName: "midEnemy")
             runAction(SKAction.sequence([
