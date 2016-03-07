@@ -30,35 +30,35 @@ class ScoreScene: SKScene {
     func scoreList() {
         oneScore.text = "1.  \(userScores.stringForKey("1")!)"
         oneScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        oneScore.position = CGPointMake(frame.width/2 - 85, frame.height - 75)
+        oneScore.position = CGPointMake(frame.width/2 - 120, frame.height - 75)
         oneScore.zPosition = 1
         oneScore.fontSize = 22
         self.addChild(oneScore)
         
         twoScore.text = "2.  \(userScores.stringForKey("2")!)"
         twoScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        twoScore.position = CGPointMake(frame.width/2 - 85, frame.height - 110)
+        twoScore.position = CGPointMake(frame.width/2 - 120, frame.height - 110)
         twoScore.zPosition = 1
         twoScore.fontSize = 22
         self.addChild(twoScore)
         
         thrScore.text = "3.  \(userScores.stringForKey("3")!)"
         thrScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        thrScore.position = CGPointMake(frame.width/2 - 85, frame.height - 145)
+        thrScore.position = CGPointMake(frame.width/2 - 120, frame.height - 145)
         thrScore.zPosition = 1
         thrScore.fontSize = 22
         self.addChild(thrScore)
         
         fouScore.text = "4.  \(userScores.stringForKey("4")!)"
         fouScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        fouScore.position = CGPointMake(frame.width/2 - 85, frame.height - 180)
+        fouScore.position = CGPointMake(frame.width/2 - 120, frame.height - 180)
         fouScore.zPosition = 1
         fouScore.fontSize = 22
         self.addChild(fouScore)
         
         fivScore.text = "5.  \(userScores.stringForKey("5")!)"
         fivScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        fivScore.position = CGPointMake(frame.width/2 - 85, frame.height - 215)
+        fivScore.position = CGPointMake(frame.width/2 - 120, frame.height - 215)
         fivScore.zPosition = 1
         fivScore.fontSize = 22
         self.addChild(fivScore)
@@ -93,7 +93,7 @@ class ScoreScene: SKScene {
         
         tenScore.text = "10.  \(userScores.stringForKey("10")!)"
         tenScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        tenScore.position = CGPointMake(frame.width/2 + 45, frame.height - 215)
+        tenScore.position = CGPointMake(frame.width/2 + 35, frame.height - 215)
         tenScore.zPosition = 1
         tenScore.fontSize = 22
         self.addChild(tenScore)

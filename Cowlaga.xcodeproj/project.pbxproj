@@ -21,6 +21,7 @@
 		F6439E7E1C8B8D4C00FB7A52 /* ConfirmationWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6439E7D1C8B8D4C00FB7A52 /* ConfirmationWindow.swift */; };
 		F6439E801C8CAA5F00FB7A52 /* ResetConfirmationWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6439E7F1C8CAA5F00FB7A52 /* ResetConfirmationWindow.swift */; };
 		F6439E821C8CBABE00FB7A52 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6439E811C8CBABE00FB7A52 /* Star.swift */; };
+		F6439E841C8D215C00FB7A52 /* HrdEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6439E831C8D215C00FB7A52 /* HrdEnemy.swift */; };
 		F6868EE51C7E476400E6F4CB /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6868EE41C7E476300E6F4CB /* MenuScene.swift */; };
 		F6868EE71C7E480F00E6F4CB /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F6868EE61C7E480F00E6F4CB /* MenuScene.sks */; };
 		F6868EE91C7E5F4E00E6F4CB /* ScoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F6868EE81C7E5F4E00E6F4CB /* ScoreScene.sks */; };
@@ -66,6 +67,7 @@
 		F6439E7D1C8B8D4C00FB7A52 /* ConfirmationWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationWindow.swift; sourceTree = "<group>"; };
 		F6439E7F1C8CAA5F00FB7A52 /* ResetConfirmationWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetConfirmationWindow.swift; sourceTree = "<group>"; };
 		F6439E811C8CBABE00FB7A52 /* Star.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
+		F6439E831C8D215C00FB7A52 /* HrdEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HrdEnemy.swift; sourceTree = "<group>"; };
 		F6868EE41C7E476300E6F4CB /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		F6868EE61C7E480F00E6F4CB /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		F6868EE81C7E5F4E00E6F4CB /* ScoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ScoreScene.sks; sourceTree = "<group>"; };
@@ -121,28 +123,29 @@
 		F60D482C1C67B6CE00B4FA9A /* Cowlaga */ = {
 			isa = PBXGroup;
 			children = (
+				F60D48351C67B6CE00B4FA9A /* GameViewController.swift */,
 				F60D482F1C67B6CE00B4FA9A /* AppDelegate.swift */,
 				F60D48311C67B6CE00B4FA9A /* GameScene.sks */,
+				F6868EE61C7E480F00E6F4CB /* MenuScene.sks */,
+				F6868EE81C7E5F4E00E6F4CB /* ScoreScene.sks */,
+				F6439E721C8683F200FB7A52 /* GameOverScene.sks */,
 				F60D48331C67B6CE00B4FA9A /* GameScene.swift */,
+				F6868EE41C7E476300E6F4CB /* MenuScene.swift */,
+				F6868EEA1C7E5F5B00E6F4CB /* ScoreScene.swift */,
+				F6439E701C8683AA00FB7A52 /* GameOverScene.swift */,
+				F6439E811C8CBABE00FB7A52 /* Star.swift */,
+				F6868EF81C7FBC7C00E6F4CB /* HUD.swift */,
 				F6439E6E1C85505C00FB7A52 /* InGameMenu.swift */,
 				F6439E7D1C8B8D4C00FB7A52 /* ConfirmationWindow.swift */,
 				F6439E7F1C8CAA5F00FB7A52 /* ResetConfirmationWindow.swift */,
-				F6868EF81C7FBC7C00E6F4CB /* HUD.swift */,
+				F6868EEC1C7E706F00E6F4CB /* Player.swift */,
 				F6868EF61C7FB2D100E6F4CB /* Enemy.swift */,
 				F6439E741C869DC300FB7A52 /* BasicEnemy.swift */,
-				F6439E811C8CBABE00FB7A52 /* Star.swift */,
 				F6439E761C879C1200FB7A52 /* MidEnemy.swift */,
+				F6439E831C8D215C00FB7A52 /* HrdEnemy.swift */,
+				F6868EF41C7F90D200E6F4CB /* Bullet.swift */,
 				F6868EF01C7E957D00E6F4CB /* PlayerBullet.swift */,
 				F6868EF21C7E958600E6F4CB /* EnemyBullet.swift */,
-				F6868EF41C7F90D200E6F4CB /* Bullet.swift */,
-				F6868EEC1C7E706F00E6F4CB /* Player.swift */,
-				F6868EE41C7E476300E6F4CB /* MenuScene.swift */,
-				F6868EE81C7E5F4E00E6F4CB /* ScoreScene.sks */,
-				F6868EEA1C7E5F5B00E6F4CB /* ScoreScene.swift */,
-				F6439E701C8683AA00FB7A52 /* GameOverScene.swift */,
-				F6439E721C8683F200FB7A52 /* GameOverScene.sks */,
-				F6868EE61C7E480F00E6F4CB /* MenuScene.sks */,
-				F60D48351C67B6CE00B4FA9A /* GameViewController.swift */,
 				F60D48371C67B6CE00B4FA9A /* Main.storyboard */,
 				F60D483A1C67B6CE00B4FA9A /* Images.xcassets */,
 				F60D483C1C67B6CE00B4FA9A /* LaunchScreen.xib */,
@@ -295,6 +298,7 @@
 				F6439E821C8CBABE00FB7A52 /* Star.swift in Sources */,
 				F6868EF71C7FB2D100E6F4CB /* Enemy.swift in Sources */,
 				F6439E711C8683AA00FB7A52 /* GameOverScene.swift in Sources */,
+				F6439E841C8D215C00FB7A52 /* HrdEnemy.swift in Sources */,
 				F6868EED1C7E706F00E6F4CB /* Player.swift in Sources */,
 				F6439E801C8CAA5F00FB7A52 /* ResetConfirmationWindow.swift in Sources */,
 				F6439E6F1C85505C00FB7A52 /* InGameMenu.swift in Sources */,

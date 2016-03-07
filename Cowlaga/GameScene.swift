@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var basicEnemyArray = [BasicEnemy]()    // Hold all alive basic enemies
     var midEnemyArray = [MidEnemy]()        // Hold all alive mid enemies
+    var hrdEnemyArray = [HrdEnemy]()
     var bodiesToRemove = [SKSpriteNode]()   // Hold all dead enemies waiting to be removed
     var shouldRemoveBodies = false          // Flag to determine if there are enemies waiting to be removed
     
@@ -200,6 +201,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
+    func addStars() {
+        for _ in 0...100 {
+            let i = Star(imageName: "star")
+            
+//            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 2.0, max: 10.0))))
+            runAction(SKAction.repeatActionForever(
+                SKAction.sequence([
+                    SKAction.waitForDuration(NSTimeInterval (random(min: 4.1, max: 10.0))),
+                    SKAction.runBlock({
+//                        self.addBasicEnemy(i)
+//                        starArray.append(enemy)
+                        i.addStar(self)
+                    })
+                    ])
+                ))
+        }
+    }
+    
     func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
@@ -214,7 +233,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundColor = SKColor.blackColor()
         let bgImage = SKSpriteNode(imageNamed: "bg")
         bgImage.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
-        bgImage.zPosition = -1
+        bgImage.zPosition = -2
         self.addChild(bgImage)
         
         // Set world physics and gravity
@@ -229,10 +248,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Add Player
         runAction(SKAction.runBlock(addPlayer))
         
+        addStars()
         
+        //
         runAction(SKAction.sequence([
             SKAction.waitForDuration(1.0),
-            SKAction.runBlock(addEnemyActions)
+            SKAction.runBlock(addEnemyActions),
             ])
         )
         
@@ -526,7 +547,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("player hit")
             projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode,
                 secondBody: secondBody.node as! SKSpriteNode)
-            lives--
+//            lives--
 
             if score >= 30 {
                 score -= 30
