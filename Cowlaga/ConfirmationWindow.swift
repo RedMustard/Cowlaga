@@ -19,7 +19,7 @@ class ConfirmationWindow: SKSpriteNode {
         
         self.size = CGSize(width: 400, height: 220)
         self.position = CGPoint(x: 330, y: 135)
-        self.zPosition = 2
+        self.zPosition = 4
         self.alpha = 1.5
         
         addMenu()
@@ -34,20 +34,20 @@ class ConfirmationWindow: SKSpriteNode {
     
     func addMenu() {
         confirmationLabel.position = CGPoint(x: self.size.width/2 - 200 , y: self.size.height/2 - 45)
-        confirmationLabel.zPosition = 3
+        confirmationLabel.zPosition = 5
         confirmationLabel.fontSize = 18
         confirmationLabel.alpha = 2
         self.addChild(confirmationLabel)
         
         
-        buttonOkay.position = CGPoint(x: self.size.width/2 - 200, y: self.size.height/2 - 100)
-        buttonOkay.zPosition = 3
+        buttonOkay.position = CGPoint(x: self.size.width/2 - 197, y: self.size.height/2 - 100)
+        buttonOkay.zPosition = 5
         buttonOkay.setScale(1)
         buttonOkay.alpha = 2
         self.addChild(buttonOkay)
         
-        buttonCancel.position = CGPoint(x: self.size.width/2 - 200, y: self.size.height/2 - 155)
-        buttonCancel.zPosition = 3
+        buttonCancel.position = CGPoint(x: self.size.width/2 - 197, y: self.size.height/2 - 155)
+        buttonCancel.zPosition = 5
         buttonCancel.setScale(1)
         buttonCancel.alpha = 2
         self.addChild(buttonCancel)

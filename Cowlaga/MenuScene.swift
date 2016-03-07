@@ -14,6 +14,7 @@ class MenuScene: SKScene {
     let gameTitle = SKLabelNode()
     
     
+    
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor()
         let bgImage = SKSpriteNode(imageNamed: "bg")
@@ -33,6 +34,8 @@ class MenuScene: SKScene {
         scoreButton.position = CGPointMake(frame.width/2, frame.height/2-135)
         self.addChild(scoreButton)
         scoreButton.zPosition = 1
+        
+        
     }
     
     

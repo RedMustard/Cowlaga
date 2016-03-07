@@ -29,7 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var basicEnemyArray = [BasicEnemy]()    // Hold all alive basic enemies
     var midEnemyArray = [MidEnemy]()        // Hold all alive mid enemies
-    var hrdEnemyArray = [HrdEnemy]()
+    var hvyEnemyArray = [HeavyEnemy]()      // Hold all alive heavy enemies
     var bodiesToRemove = [SKSpriteNode]()   // Hold all dead enemies waiting to be removed
     var shouldRemoveBodies = false          // Flag to determine if there are enemies waiting to be removed
     
@@ -131,10 +131,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for enemy in midEnemyArray {
             enemy.fireBullet(self)
         }
+        for enemy in hvyEnemyArray {
+            enemy.fireBullet(self)
+        }
     }
     
     
-    func enemyHit(enemy: MidEnemy) {
+    func midEnemyHit(enemy: MidEnemy) {
         enemy.addHit()
         score += 10
         updateScore()
@@ -143,6 +146,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func midEnemyDead(enemy: MidEnemy)-> Bool {
+        if enemy.health == 0 {
+            return true
+        }
+        
+        return false
+    }
+    
+    
+    func hvyEnemyHit(enemy: HeavyEnemy) {
+        enemy.addHit()
+        score += 20
+        updateScore()
+        print("enemy health: \(enemy.health)")
+    }
+    
+    
+    func hvyEnemyDead(enemy: HeavyEnemy)-> Bool {
         if enemy.health == 0 {
             return true
         }
@@ -161,6 +181,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addMidEnemy(enemy: MidEnemy) {
         let enemy = MidEnemy(imageName: "midEnemy")
         midEnemyArray.append(enemy)
+        enemy.addEnemy(self)
+    }
+    
+    func addHvyEnemy(enemy: HeavyEnemy) {
+        let enemy = HeavyEnemy(imageName: "hvyEnemy")
+        hvyEnemyArray.append(enemy)
         enemy.addEnemy(self)
     }
     
@@ -198,7 +224,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 )
             ]))
         }
-
+        
+        for _ in 0...0 {
+            let i = HeavyEnemy(imageName: "hvyEnemy")
+            runAction(SKAction.sequence([
+                SKAction.waitForDuration(NSTimeInterval (random(min: 90.0, max: 120.0))),
+                SKAction.repeatActionForever(
+                    SKAction.sequence([
+                        SKAction.waitForDuration(NSTimeInterval (random(min: 15.0, max: 20.0))),
+                        SKAction.runBlock({
+                            self.addHvyEnemy(i)
+                        })
+                        ])
+                )
+                ]))
+        }
     }
     
     func addStars() {
@@ -479,12 +519,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func projectileDidCollideWithMonster(firstBody:SKSpriteNode, secondBody:SKSpriteNode) {
         print("Removed")
         
-        // If midEnemy is hit
+        // If hvyEnemy is hit
         var i = 0
+        for index in hvyEnemyArray {
+            if index == secondBody {
+                hvyEnemyHit(secondBody as! HeavyEnemy)
+                updateScore()
+                
+                if hvyEnemyDead(secondBody as! HeavyEnemy) {
+                    bodiesToRemove.append(firstBody)
+                    bodiesToRemove.append(secondBody)
+                    shouldRemoveBodies = true
+                    
+                    hvyEnemyArray.removeAtIndex(hvyEnemyArray.indexOf(index)!)
+                    score += 1000
+                    updateScore()
+
+                } else {
+                    bodiesToRemove.append(firstBody)
+                    shouldRemoveBodies = true
+                }
+            }
+        }
+        
+        
+        // If midEnemy is hit
+        i = 0
         for index in midEnemyArray {
             if index == secondBody {
                 print("index = second")
-                enemyHit(secondBody as! MidEnemy)
+                midEnemyHit(secondBody as! MidEnemy)
                 updateScore()
                 
                 if midEnemyDead(secondBody as! MidEnemy) {

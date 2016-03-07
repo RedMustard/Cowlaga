@@ -14,7 +14,7 @@ class InGameMenu: SKSpriteNode {
     let buttonRestart = SKSpriteNode(imageNamed: "restart_button")
     let buttonBack = SKSpriteNode(imageNamed: "back_button")
     let width = 1350
-    let height = 700
+    let height = 750
 
 
     init() {
@@ -23,7 +23,7 @@ class InGameMenu: SKSpriteNode {
         
         self.size = CGSize(width: self.width, height: self.height)
         self.position = CGPoint(x: 0, y: 0)
-        self.zPosition = 1
+        self.zPosition = 2
         self.alpha = 0.7
         
         addMenu()
@@ -39,29 +39,29 @@ class InGameMenu: SKSpriteNode {
         let pauseLabel = SKLabelNode(text: "Game Paused")
         pauseLabel.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 60)
         pauseLabel.alpha = 2
-        pauseLabel.zPosition = 1
+        pauseLabel.zPosition = 3
         self.addChild(pauseLabel)
         
-        buttonMenu.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 132)
-        buttonMenu.zPosition = 1
+        buttonMenu.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 160)
+        buttonMenu.zPosition = 3
         buttonMenu.setScale(1)
         buttonMenu.alpha = 2
         self.addChild(buttonMenu)
 
-        buttonScores.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 187)
-        buttonScores.zPosition = 1
+        buttonScores.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 215)
+        buttonScores.zPosition = 3
         buttonScores.setScale(1)
         buttonScores.alpha = 2
         self.addChild(buttonScores)
         
-        buttonRestart.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 242)
-        buttonRestart.zPosition = 1
+        buttonRestart.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 270)
+        buttonRestart.zPosition = 3
         buttonRestart.setScale(1)
         buttonRestart.alpha = 2
         self.addChild(buttonRestart)
         
-        buttonBack.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 297)
-        buttonBack.zPosition = 1
+        buttonBack.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 325)
+        buttonBack.zPosition = 3
         buttonBack.setScale(1)
         buttonBack.alpha = 2
         self.addChild(buttonBack)
