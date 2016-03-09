@@ -13,6 +13,7 @@ class InGameMenu: SKSpriteNode {
     let buttonScores = SKSpriteNode(imageNamed: "score_button")
     let buttonRestart = SKSpriteNode(imageNamed: "restart_button")
     let buttonBack = SKSpriteNode(imageNamed: "back_button")
+    let buttonGod = SKShapeNode(circleOfRadius: 10)
     let width = 1350
     let height = 750
 
@@ -37,7 +38,7 @@ class InGameMenu: SKSpriteNode {
     
     func addMenu() {
         let pauseLabel = SKLabelNode(text: "Game Paused")
-        pauseLabel.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 60)
+        pauseLabel.position = CGPoint(x: self.size.width/4 - 4, y: self.size.height/2 - 90)
         pauseLabel.alpha = 2
         pauseLabel.zPosition = 3
         self.addChild(pauseLabel)
@@ -65,5 +66,18 @@ class InGameMenu: SKSpriteNode {
         buttonBack.setScale(1)
         buttonBack.alpha = 2
         self.addChild(buttonBack)
+        
+        let labelGod = SKLabelNode(text: "God Mode")
+        labelGod.position = CGPoint(x: self.size.width/2 - 60, y: self.size.height/2 - 85)
+        labelGod.zPosition = 3
+        labelGod.fontSize = 18
+        labelGod.alpha = 2
+        self.addChild(labelGod)
+        
+        buttonGod.position = CGPoint(x: self.size.width/2 - 60, y: self.size.height/2 - 50)
+        buttonGod.zPosition = 3
+        buttonGod.fillColor = SKColor.whiteColor()
+        buttonGod.alpha = 2
+        self.addChild(buttonGod)
     }
 }

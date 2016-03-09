@@ -13,14 +13,12 @@ class MenuScene: SKScene {
     let scoreButton = SKSpriteNode(imageNamed: "score_button")
     let gameTitle = SKLabelNode()
     
-    
-    
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor()
         let bgImage = SKSpriteNode(imageNamed: "bg")
         bgImage.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         self.addChild(bgImage)
-        bgImage.zPosition = 0
+        bgImage.zPosition = -2
         
         gameTitle.text = "Cowlaga"
         gameTitle.position = CGPointMake(frame.width/2, frame.height-105)
@@ -34,8 +32,7 @@ class MenuScene: SKScene {
         scoreButton.position = CGPointMake(frame.width/2, frame.height/2-135)
         self.addChild(scoreButton)
         scoreButton.zPosition = 1
-        
-        
+
     }
     
     

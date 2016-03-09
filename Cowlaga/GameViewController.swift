@@ -11,6 +11,7 @@ import SpriteKit
 
 var score = IntegerLiteralType()
 var scoreFlag = false
+var godFlag = false
 let userScores = NSUserDefaults.standardUserDefaults()
 
 
@@ -56,8 +57,8 @@ class GameViewController: UIViewController {
 //        let scene = GameScene(size: view.bounds.size) // Base Scene
         
         let skView = view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        skView.showsFPS = false
+        skView.showsNodeCount = false
         skView.ignoresSiblingOrder = true
         menuScene.scaleMode = .ResizeFill
         skView.multipleTouchEnabled = true

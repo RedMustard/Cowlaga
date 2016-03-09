@@ -9,18 +9,9 @@
 import SpriteKit
 
 class Star: Enemy {
-//    private var canFire = true
-    
     
     override init(imageName: String) {
         super.init(imageName: imageName)
-        
-//        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
-//        self.physicsBody?.dynamic = true
-//        self.physicsBody?.allowsRotation = false
-//        self.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-//        self.physicsBody?.contactTestBitMask = PhysicsCategory.PlayProj|PhysicsCategory.Player
-//        self.physicsBody?.collisionBitMask = PhysicsCategory.None
     }
     
     

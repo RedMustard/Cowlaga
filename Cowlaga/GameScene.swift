@@ -50,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Else respawn player
         else {
             addChild(player)
-            player.position = CGPoint(x: player.size.width, y: self.frame.height/2)
+            player.position = CGPoint(x: player.size.width+60, y: self.frame.height/2)
             runAction(SKAction.sequence([
                 SKAction.runBlock(playerGodMode),
                 SKAction.waitForDuration(0.5),
@@ -194,7 +194,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.fireBullet(self)
     }
     
-    func addEnemyActions() {
+    func addEnemies() {
         // Add basic level enemies after 2-10 seconds. Repeatedly spawn every 5-10 seconds
         for _ in 0...7 {
             let i = BasicEnemy(imageName: "basicEnemy")
@@ -245,13 +245,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for _ in 0...100 {
             let i = Star(imageName: "star")
             
-//            runAction(SKAction.waitForDuration(NSTimeInterval (random(min: 2.0, max: 10.0))))
             runAction(SKAction.repeatActionForever(
                 SKAction.sequence([
                     SKAction.waitForDuration(NSTimeInterval (random(min: 4.1, max: 10.0))),
                     SKAction.runBlock({
-//                        self.addBasicEnemy(i)
-//                        starArray.append(enemy)
                         i.addStar(self)
                     })
                     ])
@@ -277,23 +274,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(bgImage)
         
         // Set world physics and gravity
-        scene!.physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRect(x:40, y:0, width: self.frame.width, height: self.frame.height-30))
+        scene!.physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRect(x:45, y:15, width: self.frame.width, height: self.frame.height-50))
         scene!.physicsBody?.categoryBitMask = PhysicsCategory.Border
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
         
         // Add HUD
-        runAction(SKAction.runBlock(addHud))
+        addHud()
         
         // Add Player
-        runAction(SKAction.runBlock(addPlayer))
+        addPlayer()
         
+        // Add Stars
         addStars()
         
-        //
+        // Add Enemies after 1 second delay
         runAction(SKAction.sequence([
             SKAction.waitForDuration(1.0),
-            SKAction.runBlock(addEnemyActions),
+            SKAction.runBlock(addEnemies),
             ])
         )
         
@@ -319,6 +317,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 runAction(SKAction.runBlock(pauseGame))
             }
             
+            if node == menu.buttonGod {
+                if godFlag == false {
+                    godFlag = true
+                    menu.buttonGod.fillColor = SKColor.greenColor()
+                } else if godFlag == true {
+                    godFlag = false
+                    menu.buttonGod.fillColor = SKColor.whiteColor()
+                }
+            }
+            
             if node == menu.buttonMenu {
                 openConfirm()
                 prevNodeMenu = true
@@ -335,6 +343,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         initUserScores()
                         addScore(score)
                         score = 0
+                        godFlag = false
                         
                         let scene = MenuScene(size: view.bounds.size)
                         scene.scaleMode = .ResizeFill
@@ -346,6 +355,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         initUserScores()
                         addScore(score)
                         score = 0
+                        godFlag = false
                     
                         let scene = ScoreScene(size: view.bounds.size)
                         scene.scaleMode = .ResizeFill
@@ -358,6 +368,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         initUserScores()
                         addScore(score)
                         score = 0
+                        godFlag = false
                     
                         let scene = GameScene(size: view.bounds.size)
                         scene.scaleMode = .ResizeFill
@@ -459,12 +470,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for button in [hud.buttonDirUp, hud.buttonDirDown, hud.buttonShoot] {
                 if button.containsPoint(location) {
                     let index = hud.pressedButtons.indexOf(button)
+                    
                     if index != nil {
                         hud.pressedButtons.removeAtIndex(index!)
                     }
                 }
+                    
                 else if (button.containsPoint(previousLocation)) {
                     let index = hud.pressedButtons.indexOf(button)
+                    
                     if index != nil {
                         hud.pressedButtons.removeAtIndex(index!)
                     }
@@ -611,7 +625,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("player hit")
             projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode,
                 secondBody: secondBody.node as! SKSpriteNode)
-//            lives--
+            if godFlag == false {
+                lives--
+            } 
 
             if score >= 30 {
                 score -= 30

@@ -17,7 +17,7 @@ class Player: SKSpriteNode {
         let texture = SKTexture(imageNamed: "Spaceship")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height - 20))
         self.physicsBody?.categoryBitMask = PhysicsCategory.Player
         self.physicsBody?.contactTestBitMask = PhysicsCategory.EnemyProj
         self.physicsBody?.collisionBitMask = PhysicsCategory.Border
